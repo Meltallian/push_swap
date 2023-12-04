@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/04 12:48:35 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/04 16:57:54 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,11 @@
 # include <string.h>
 # include <limits.h>
 # include "libft/libft.h"
+
+typedef struct s_data {
+	char	**tab;
+	int		x;
+	int		y;
+}	t_data;
 
 #endif // PUSH_SWAP_H
