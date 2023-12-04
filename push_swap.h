@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/04 16:57:54 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/04 17:41:32 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct s_data {
 	char	**tab;
+	int		*tabi;
 	int		x;
 	int		y;
 }	t_data;
