@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 18:10:11 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/05 15:48:34 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/05 16:34:08 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	param_error(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->stack_a[i])
+	while (i < data->y)
 	{
 		if (data->stack_a[i] > 2147483647
 			|| data->stack_a[i] < -2147483648)
@@ -77,6 +77,16 @@ void	conver_param(t_data *data, int ac, char **av)
 			data->stack_a[i] = ft_atoi(av[i]);
 			i++;
 		}
+		data->tab = (char **)malloc((ac + 1) * sizeof(char *));
+		i = 0;
+		while (i < ac)
+		{
+			data->tab[i] = ft_itoa(data->stack_a[i]);
+			i++;
+		}
+		data->tab[ac] = NULL;
 	}
+	stack_a_height(data);
+	string_error(data);
 	param_error(data);
 }
