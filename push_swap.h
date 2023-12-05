@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/05 13:27:08 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/05 15:41:53 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,17 @@
 # include "libft/libft.h"
 
 typedef struct s_data {
-	char	**tab;
-	int		*stack_a;
-	int		*stack_b;
-	int		x;
-	int		y;
+	char		**tab;
+	long int	*stack_a;
+	int			*stack_b;
+	int			x;
+	int			y;
 }	t_data;
 
 void	stack_a_height(t_data *data);
-void	conver_string(t_data *data, char **av);
+int		conver_string(t_data *data, char **av);
 void	conver_param(t_data *data, int ac, char **av);
 void	clean(t_data *data);
+int		kill(t_data *data);
 
 #endif // PUSH_SWAP_H
