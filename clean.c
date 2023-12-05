@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   asc_int_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/05 15:45:48 by jbidaux          ###   ########.fr       */
+/*   Created: 2023/12/05 15:48:16 by jbidaux           #+#    #+#             */
+/*   Updated: 2023/12/05 15:48:40 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	stack_a_height(t_data *data)
 {
-	t_data	data;
-	int		i;
+	data->y = 0;
+	while (data->tab[data->y])
+		data->y++;
+	data->stack_b = (int *)malloc((data->y) * sizeof(int));
+}
+
+void	clean(t_data *data)
+{
+	int	i;
 
 	i = 0;
-	if (ac < 2)
+	if (data->stack_a)
+		free(data->stack_a);
+	if (data->stack_b)
+		free(data->stack_b);
+	if (data->tab)
 	{
-		ft_printf("Error\n");
-		return (0);
+		while (data->tab[i])
+			free(data->tab[i++]);
 	}
-	if (ac == 2)
-		conver_string(&data, av);
-	if (ac > 2)
-		conver_param(&data, ac - 1, &av[1]);
-/* 	while (i < data.y)
-	{
-		printf("%ld\n", data.stack_a[i]);
-		i++;
-	} */
-	while (i < ac - 1)
-	{
-		printf("%ld\n", data.stack_a[i]);
-		i++;
-	}
-	clean(&data);
-	return (0);
+}
+
+int	kill(t_data *data)
+{
+	ft_printf("Error\n");
+	clean(data);
+	exit (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/05 15:41:53 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/05 15:49:48 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int		conver_string(t_data *data, char **av);
 void	conver_param(t_data *data, int ac, char **av);
 void	clean(t_data *data);
 int		kill(t_data *data);
+void	param_error(t_data *data);
+void	string_error(t_data *data);
 
 #endif // PUSH_SWAP_H

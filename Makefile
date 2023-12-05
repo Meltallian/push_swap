@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
 LIBFT = libft/libft.a
-PUSH_SWAP_SRC = main.c asc_to_int.c
+PUSH_SWAP_SRC = main.c asc_int.c clean.c
 PUSH_SWAP_OBJ = $(PUSH_SWAP_SRC:.c=.o)
 #INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
 #pas necessaire parceque -lft -lmlx dans la ligne cc
