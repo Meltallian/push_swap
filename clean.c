@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asc_int_utils.c                                    :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:48:16 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/05 15:48:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/07 12:10:20 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	stack_a_height(t_data *data)
-{
-	data->y = 0;
-	while (data->tab[data->y])
-		data->y++;
-	data->stack_b = (int *)malloc((data->y) * sizeof(int));
-}
 
 void	clean(t_data *data)
 {

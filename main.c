@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/05 16:37:07 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/07 11:25:25 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	main(int ac, char **av)
 		printf("%ld\n", data.stack_a[i]);
 		i++;
 	}
-	while (i < ac - 1)
+/* 	while (i < ac - 1)
 	{
 		printf("%ld\n", data.stack_a[i]);
 		i++;
 	}
-	i = 0;
+	i = 0; */
 	while (i < ac - 1)
 	{
 		printf("%s\n", data.tab[i]);
