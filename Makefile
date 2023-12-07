@@ -1,9 +1,10 @@
 # Variables
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 NAME = push_swap
 LIBFT = libft/libft.a
-PUSH_SWAP_SRC = main.c asc_int.c clean.c atoi_mod.c
+PUSH_SWAP_SRC = main.c asc_int.c clean.c atoi_mod.c ops.c utils.c \
+
 PUSH_SWAP_OBJ = $(PUSH_SWAP_SRC:.c=.o)
 #INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
 #pas necessaire parceque -lft -lmlx dans la ligne cc
