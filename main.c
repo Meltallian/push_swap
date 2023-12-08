@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/08 14:01:17 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/08 16:18:07 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,22 @@
 	return (0);
 } */
 
+
+void	initiating(t_data *data)
+{
+	data->kill.stack = 0;
+	data->kill.tab = 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
-	data.kill.stack = 0;
-	data.kill.tab = 0;
 	int		i;
 
+	initiating(&data);
 	i = 0;
 	if (ac < 2)
-	{
-		ft_printf("Error\n");
 		return (0);
-	}
 	if (ac == 2)
 		conver_string(&data, av);
 	if (ac > 2)

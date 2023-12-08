@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/08 14:38:52 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/08 16:16:14 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ long int	ft_atoi_evil(const char *str, t_data *data);
 size_t		ft_strcspn(const char *s1, const char *s2);
 int			operation(t_data *data);
 void		kill_tab_atoi(t_data *data);
+void		initiating(t_data *data);
 
 #endif // PUSH_SWAP_H
