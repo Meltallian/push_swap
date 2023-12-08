@@ -6,13 +6,13 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 18:10:11 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/07 17:00:13 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:37:46 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	not_integer(t_data *data)
+/* void	not_integer(t_data *data)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ void	not_integer(t_data *data)
 			kill(data);
 		i++;
 	}
-}
+} */
 
 void	string_error(t_data *data)
 {
@@ -65,6 +65,14 @@ void	check_int_dup(t_data *data)
 		}
 		i++;
 	}
+	i = 0;
+	while (i < data->y)
+	{
+		if (data->stack_a[i] > 2147483647
+			|| data->stack_a[i] < -2147483648)
+			kill(data);
+		i++;
+	}
 }
 
 int	conver_string(t_data *data, char **av)
@@ -82,7 +90,6 @@ int	conver_string(t_data *data, char **av)
 	}
 	data->stack_a[i] = 0;
 	string_error(data);
-	not_integer(data);
 	check_int_dup(data);
 	return (0);
 }
@@ -110,6 +117,6 @@ void	conver_param(t_data *data, int ac, char **av)
 	}
 	stack_a_height(data);
 	string_error(data);
-	not_integer(data);
 	check_int_dup(data);
+	kill_tab_atoi(data);
 }

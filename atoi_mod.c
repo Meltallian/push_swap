@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:38:08 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/07 17:52:11 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:23:30 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ long int	ft_atoi_evil(const char *str, t_data *data)
 	data->ato.neg = 1;
 	i = 0;
 	data->ato.n = 0;
-	data->bowl = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -37,10 +36,12 @@ long int	ft_atoi_evil(const char *str, t_data *data)
 		i++;
 	}
 	if (!(str[i] >= 48 && str[i] <= 57))
-		data->bowl = 1;
+		data->kill.stack = 1;
 	while (str[i] >= 48 && str[i] <= 57)
 	{
 		data->ato.n = (data->ato.n + (str[i] - 48)) * 10;
+		if (!(str[i] >= '0' && str[i] <= '9') && str[i] != ' ')
+			data->kill.stack = 1;
 		i++;
 	}
 	return (data->ato.neg * (data->ato.n / 10));

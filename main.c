@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/07 17:57:14 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:01:17 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 int	main(int ac, char **av)
 {
 	t_data	data;
+	data.kill.stack = 0;
+	data.kill.tab = 0;
 	int		i;
 
 	i = 0;
@@ -60,7 +62,6 @@ int	main(int ac, char **av)
 		printf("%s\n", data.tab[i]);
 		i++;
 	}
-//	kill(&data);
 	clean(&data);
 	return (0);
 }

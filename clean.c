@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:48:16 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/07 17:57:19 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:04:34 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,19 @@ void	clean(t_data *data)
 
 int	kill(t_data *data)
 {
-/* 	if (data->bowl == 1)
+	ft_printf("Error\n");
+	clean(data);
+	exit (1);
+}
+
+void	kill_tab_atoi(t_data *data)
+{
+	if (data->kill.stack == 1)
 	{
 		ft_printf("Error\n");
 		clean(data);
 		exit (1);
-	} */
-	ft_printf("Error\n");
-	clean(data);
-	exit (1);
+	}
 }
 
 //void	ft_putstr_fd(char *s, int fd)
