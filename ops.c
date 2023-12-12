@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 14:50:30 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 16:29:35 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	sa(t_data *data)
 		return ;
 	int	temp;
 
-	temp = data->stack_a[0];
-	data->stack_a[0] = data->stack_a[1];
-	data->stack_a[1] = temp;
+	temp = data->stacks[A][0].value;
+	data->stacks[A][0].value = data->stacks[A][1].value;
+	data->stacks[A][1].value = temp;
 }
 
 void	sb(t_data *data)
@@ -29,9 +29,9 @@ void	sb(t_data *data)
 		return ;
 	int	temp;
 
-	temp = data->stack_b[0];
-	data->stack_b[0] = data->stack_b[1];
-	data->stack_b[1] = temp;
+	temp = data->stacks[B][0].value;
+	data->stacks[B][0].value = data->stacks[B][1].value;
+	data->stacks[B][1].value = temp;
 }
 
 void	ss(t_data *data)
@@ -45,22 +45,22 @@ void	pa(t_data *data)
 	int	i;
 	int	temp;
 
-	if (!data->stack_b)
+	if (!data->stacks[B])
 		return ;
 	i = 0;
 	while (i < data->y_a - 1)
 	{
-		temp = data->stack_a[i];
-		data->stack_a[i + 1] = temp;
+		temp = data->stacks[A][i].value;
+		data->stacks[A][i + 1].value = temp;
 		i++;
 	}
-	temp = data->stack_b[0];
-	data->stack_a[0] = temp;
+	temp = data->stacks[B][0].value;
+	data->stacks[A][0].value = temp;
 	i = 0;
 	while (i < data->y_b - 1)
 	{
-		temp = data->stack_b[i + 1];
-		data->stack_b[i] = temp;
+		temp = data->stacks[B][i + 1].value;
+		data->stacks[B][i].value = temp;
 		i++;
 	}
 	data->y_b--;
@@ -71,24 +71,24 @@ void	pb(t_data *data)
 	int i;
 	int temp;
 
-	if (!data->stack_a)
+	if (!data->stacks[A])
 		return;
 	i = data->y_b - 1;
 	while (i >= 0)
 	{
-		data->stack_b[i + 1] = data->stack_b[i];
+		data->stacks[B][i + 1].value = data->stacks[B][i].value;
 		i--;
 	}
-	temp = data->stack_a[0];
-	data->stack_b[0] = temp;
+	temp = data->stacks[A][0].value;
+	data->stacks[B][0].value = temp;
 	i = 0;
 	while (i < data->y_a - 1)
 	{
-		temp = data->stack_a[i + 1];
-		data->stack_a[i] = temp;
+		temp = data->stacks[A][i + 1].value;
+		data->stacks[A][i].value = temp;
 		i++;
 	}
-	data->stack_a[i] = 0;
+	data->stacks[A][i].value = 0;
 	data->y_a--;
 	data->y_b++;
 }

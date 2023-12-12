@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 14:43:39 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 16:28:40 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 	printf("stack_a avant commande = \n");
 	while (i < len)
 	{
-		printf("%ld", data.stack_a[i]);
+		printf("%ld", data.stacks[A][i].value);
 		i++;
 	}
 	i = 0;
@@ -63,7 +63,7 @@ int	main(int ac, char **av)
 	printf("stack_b avant commande = \n");
 	while (i < len)
 	{
-		printf("%d", data.stack_b[i]);
+		printf("%ld", data.stacks[B][i].value);
 		i++;
 	}
 	pb(&data);
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 	printf("stack_a apres commande = \n");
 	while (i < len)
 	{
-		printf("%ld", data.stack_a[i]);
+		printf("%ld", data.stacks[A][i].value);
 		i++;
 	}
 	printf("\n");
@@ -80,7 +80,7 @@ int	main(int ac, char **av)
 	printf("stack_b apres commande = \n");
 	while (i < len)
 	{
-		printf("%d", data.stack_b[i]);
+		printf("%ld", data.stacks[B][i].value);
 		i++;
 	}
 	clean(&data);

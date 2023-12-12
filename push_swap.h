@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 14:48:53 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 16:28:47 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+# define A 0
+# define B 1
 typedef struct s_kill {
 	int	tab;
 	int	stack;
@@ -31,14 +33,13 @@ typedef struct s_ato {
 	long int	n;
 	int			neg;
 }	t_ato;
-/* typedef struct s_stack {
-	long int	*stack_a;
-	int			len;
-}		 t_stack */
+typedef struct s_int {
+	int			mod;
+	long int	value;
+}	t_int;
 typedef struct s_data {
 	char		**tab;
-	long int	*stack_a;
-	int			*stack_b;
+	t_int		*stacks[2];
 	char		*line;
 	int			y_a;
 	int			y_b;

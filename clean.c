@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:48:16 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/08 14:04:34 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 16:29:03 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	clean(t_data *data)
 	int	i;
 
 	i = 0;
-	if (data->stack_a)
+	if (data->stacks[A])
 	{
-		free(data->stack_a);
-		data->stack_a = NULL;
+		free(data->stacks[A]);
+		data->stacks[A] = NULL;
 	}
-	if (data->stack_b)
+	if (data->stacks[B])
 	{
-		free(data->stack_b);
-		data->stack_b = NULL;
+		free(data->stacks[B]);
+		data->stacks[B] = NULL;
 	}
 	if (data->tab)
 	{
