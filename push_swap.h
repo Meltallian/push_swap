@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/08 16:16:14 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 13:49:22 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ typedef struct s_ato {
 	long int	n;
 	int			neg;
 }	t_ato;
+/* typedef struct s_stack {
+	long int	*stack_a;
+	int			len;
+}		 t_stack */
 typedef struct s_data {
 	char		**tab;
 	long int	*stack_a;
 	int			*stack_b;
 	char		*line;
-	int			y;
+	int			y_a;
+	int			y_b;
 	t_kill		kill;
 	t_ato		ato;
 }	t_data;
@@ -53,5 +58,9 @@ size_t		ft_strcspn(const char *s1, const char *s2);
 int			operation(t_data *data);
 void		kill_tab_atoi(t_data *data);
 void		initiating(t_data *data);
+void		sa(t_data *data);
+void		sb(t_data *data);
+void		ss(t_data *data);
+void		pa(t_data *data);
 
 #endif // PUSH_SWAP_H

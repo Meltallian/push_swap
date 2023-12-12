@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asc_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
+/*   By_a: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 18:10:11 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/08 16:34:13 by jbidaux          ###   ########.fr       */
+/*   Created: 2023/12/04 18:10:11 by_a jbidaux           #+#    #+#             */
+/*   Updated: 2023/12/12 13:50:49 by_a jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	int	i;
 
 	i = 0;
-	while (i < data->y)
+	while (i < data->y_a)
 	{
 		if (data->stack_a[i] > 2147483647
 			|| data->stack_a[i] < -2147483648)
@@ -66,7 +66,7 @@ void	check_int_dup(t_data *data)
 		i++;
 	}
 	i = 0;
-	while (i < data->y)
+	while (i < data->y_a)
 	{
 		if (data->stack_a[i] > 2147483647
 			|| data->stack_a[i] < -2147483648)
@@ -82,8 +82,8 @@ int	conver_string(t_data *data, char **av)
 	i = 0;
 	data->tab = ft_split(av[1], 32);
 	stack_a_height(data);
-	data->stack_a = (long int *)malloc((data->y) * sizeof(long int));
-	while (i < data->y)
+	data->stack_a = (long int *)malloc((data->y_a) * sizeof(long int));
+	while (i < data->y_a)
 	{
 		data->stack_a[i] = ft_atoi_evil(data->tab[i], data);
 		i++;

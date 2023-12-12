@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/08 16:18:07 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 13:53:10 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	int		i;
+	int		len;
 
 	initiating(&data);
 	i = 0;
@@ -48,21 +49,27 @@ int	main(int ac, char **av)
 		conver_string(&data, av);
 	if (ac > 2)
 		conver_param(&data, ac - 1, &av[1]);
-	// operation(&data);
-	while (i < data.y)
+	len = data.y_a;
+	while (i < len)
 	{
-		printf("%ld\n", data.stack_a[i]);
+		printf("%ld", data.stack_a[i]);
 		i++;
 	}
-	while (i < ac - 1)
-	{
-		printf("%ld\n", data.stack_a[i]);
-		i++;
-	}
+	printf("\n");
+	data.stack_b[0] = 5;
+	data.stack_b[1] = 3;
+//	pa(&data);
 	i = 0;
-	while (i < ac - 1)
+	while (i < len)
 	{
-		printf("%s\n", data.tab[i]);
+		printf("%ld", data.stack_a[i]);
+		i++;
+	}
+	printf("\n");
+	i = 0;
+	while (i < len)
+	{
+		printf("%d", data.stack_b[i]);
 		i++;
 	}
 	clean(&data);
