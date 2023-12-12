@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 16:29:35 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 16:53:08 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	sa(t_data *data)
 {
-	if (data->y_a < 2)
-		return ;
 	int	temp;
 
+	if (data->y_a < 2)
+		return ;
 	temp = data->stacks[A][0].value;
 	data->stacks[A][0].value = data->stacks[A][1].value;
 	data->stacks[A][1].value = temp;
@@ -25,10 +25,10 @@ void	sa(t_data *data)
 
 void	sb(t_data *data)
 {
+	int	temp;
+	
 	if (data->y_a < 2)
 		return ;
-	int	temp;
-
 	temp = data->stacks[B][0].value;
 	data->stacks[B][0].value = data->stacks[B][1].value;
 	data->stacks[B][1].value = temp;

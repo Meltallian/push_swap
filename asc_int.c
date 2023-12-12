@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   asc_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By_a: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
+/*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 18:10:11 by_a jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 13:50:49 by_a jbidaux          ###   ########.fr       */
+/*   Created: 2023/12/12 16:51:41 by jbidaux           #+#    #+#             */
+/*   Updated: 2023/12/12 17:04:30 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/* void	not_integer(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->y_a)
-	{
-		if (data->stacks[A][i].value > 2147483647
-			|| data->stacks[A][i].value < -2147483648)
-			kill(data);
-		i++;
-	}
-} */
 
 void	string_error(t_data *data)
 {
@@ -119,4 +105,17 @@ void	conver_param(t_data *data, int ac, char **av)
 	string_error(data);
 	check_int_dup(data);
 	kill_tab_atoi(data);
+}
+
+void	mode_allow(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->y_a)
+	{
+		data->stacks[A][i].mod = V_MOD;
+		data->stacks[B][i].mod = E_MOD;
+		i++;
+	}
 }

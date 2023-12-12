@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 16:28:47 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 17:04:46 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@
 # include "libft/libft.h"
 
 # define A 0
+
 # define B 1
+
+# define E_MOD 0
+
+# define V_MOD 1
+
 typedef struct s_kill {
 	int	tab;
 	int	stack;
@@ -56,9 +62,9 @@ void		string_error(t_data *data);
 void		check_int_dup(t_data *data);
 long int	ft_atoi_evil(const char *str, t_data *data);
 size_t		ft_strcspn(const char *s1, const char *s2);
-int			operation(t_data *data);
 void		kill_tab_atoi(t_data *data);
-void		initiating(t_data *data);
+int			init(t_data *data, int ac, char **av);
+void		mode_allow(t_data *data);
 void		sa(t_data *data);
 void		sb(t_data *data);
 void		ss(t_data *data);
