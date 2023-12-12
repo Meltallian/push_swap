@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 17:10:55 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 18:46:04 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,45 @@ int	init(t_data *data, int ac, char **av)
 	return (0);
 }
 
-void print_stack(const char *name, t_int *stack, int length) {
-    printf("%s = \n", name);
-    for (int i = 0; i < length; i++) {
-        printf("%ld ", stack[i].value);
+void print_stacks_side_by_side(t_data *data) {
+    int max_len = (data->y_a > data->y_b) ? data->y_a : data->y_b;
+
+    printf("%-20s%-20s\n", "stack_a", "stack_b");
+    for (int i = 0; i < max_len; i++) {
+        if (i < data->y_a)
+            printf("%-20ld", data->stacks[A][i].value);
+        else
+            printf("%-20s", "");
+
+        if (i < data->y_b)
+            printf("%-20ld", data->stacks[B][i].value);
+        else
+            printf("%-20s", "");
+
+        printf("\n");
     }
-    printf("\n");
 }
 
 int main(int ac, char **av) {
     t_data data;
 
-    init(&data, ac, av); // Assuming init properly initializes data
+    init(&data, ac, av); // Initialize the data structure
 
-    print_stack("stack_a avant commande", data.stacks[A], data.y_a);
-    print_stack("stack_b avant commande", data.stacks[B], data.y_b);
+    printf("Before command:\n");
+    print_stacks_side_by_side(&data);
 
-    pb(&data); // Assuming pb modifies data appropriately
+    pb(&data); // Execute the command (modify the stacks as needed)
+/* 	pb(&data);
+	pb(&data);
+	pb(&data); */
 
-    print_stack("stack_a apres commande", data.stacks[A], data.y_a);
-    print_stack("stack_b apres commande", data.stacks[B], data.y_b);
+    printf("\nAfter command:\n");
+    print_stacks_side_by_side(&data);
 
-    clean(&data);
+    clean(&data); // Clean up resources
     return 0;
 }
+
 /*
 int	main(int ac, char **av)
 {
