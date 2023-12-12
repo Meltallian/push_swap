@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 16:53:08 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 19:04:37 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sa(t_data *data)
 void	sb(t_data *data)
 {
 	int	temp;
-	
+
 	if (data->y_a < 2)
 		return ;
 	temp = data->stacks[B][0].value;
@@ -43,26 +43,23 @@ void	ss(t_data *data)
 void	pa(t_data *data)
 {
 	int	i;
-	int	temp;
 
-	if (!data->stacks[B])
+	if (!data->stacks[B] || data->y_b == 0)
 		return ;
-	i = 0;
-	while (i < data->y_a - 1)
+	i = data->y_b - 1;
+	while (data->y_a - 1 >= 0)
 	{
-		temp = data->stacks[A][i].value;
-		data->stacks[A][i + 1].value = temp;
-		i++;
+		data->stacks[A][i + 1].value = data->stacks[A][i].value;
+		i--;
 	}
-	temp = data->stacks[B][0].value;
-	data->stacks[A][0].value = temp;
+	data->stacks[A][0] = data->stacks[B][0];
 	i = 0;
 	while (i < data->y_b - 1)
 	{
-		temp = data->stacks[B][i + 1].value;
-		data->stacks[B][i].value = temp;
+		data->stacks[B][i] = data->stacks[B][i + 1];
 		i++;
 	}
+	data->y_a++;
 	data->y_b--;
 }
 
