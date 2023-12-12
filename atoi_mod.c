@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:38:08 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 13:50:38 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 14:18:35 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	stack_a_height(t_data *data)
 	while (data->tab[data->y_a])
 		data->y_a++;
 	data->stack_b = (int *)malloc((data->y_a) * sizeof(int));
+	data->y_b = 0;
 }
 
 void	atoi_evil_utils(const char *str, t_data *data, int i)

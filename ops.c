@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 13:49:39 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 14:50:30 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,47 @@ void	pa(t_data *data)
 	if (!data->stack_b)
 		return ;
 	i = 0;
-	while (data->stack_a[i])
+	while (i < data->y_a - 1)
 	{
 		temp = data->stack_a[i];
 		data->stack_a[i + 1] = temp;
-		temp = 0;
 		i++;
 	}
 	temp = data->stack_b[0];
 	data->stack_a[0] = temp;
 	i = 0;
-	while (data->stack_b[i])
+	while (i < data->y_b - 1)
 	{
 		temp = data->stack_b[i + 1];
-		data->stack_a[i] = temp;
-		temp = 0;
+		data->stack_b[i] = temp;
 		i++;
 	}
+	data->y_b--;
+}
+
+void	pb(t_data *data)
+{
+	int i;
+	int temp;
+
+	if (!data->stack_a)
+		return;
+	i = data->y_b - 1;
+	while (i >= 0)
+	{
+		data->stack_b[i + 1] = data->stack_b[i];
+		i--;
+	}
+	temp = data->stack_a[0];
+	data->stack_b[0] = temp;
+	i = 0;
+	while (i < data->y_a - 1)
+	{
+		temp = data->stack_a[i + 1];
+		data->stack_a[i] = temp;
+		i++;
+	}
+	data->stack_a[i] = 0;
+	data->y_a--;
+	data->y_b++;
 }

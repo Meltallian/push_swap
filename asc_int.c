@@ -54,7 +54,7 @@ void	check_int_dup(t_data *data)
 
 	i = 1;
 	j = 0;
-	while (data->stack_a[i] != 0)
+	while (i < data->y_a)
 	{
 		j = i - 1;
 		while (j >= 0)

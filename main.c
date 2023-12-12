@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 13:53:10 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/12 14:43:39 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,34 @@ int	main(int ac, char **av)
 	if (ac > 2)
 		conver_param(&data, ac - 1, &av[1]);
 	len = data.y_a;
+/* 	data.stack_b[0] = 5;
+	data.stack_b[1] = 3; */
+	printf("stack_a avant commande = \n");
+	while (i < len)
+	{
+		printf("%ld", data.stack_a[i]);
+		i++;
+	}
+	i = 0;
+	printf("\n");
+	printf("stack_b avant commande = \n");
+	while (i < len)
+	{
+		printf("%d", data.stack_b[i]);
+		i++;
+	}
+	pb(&data);
+	i = 0;
+	printf("\n");
+	printf("stack_a apres commande = \n");
 	while (i < len)
 	{
 		printf("%ld", data.stack_a[i]);
 		i++;
 	}
 	printf("\n");
-	data.stack_b[0] = 5;
-	data.stack_b[1] = 3;
-//	pa(&data);
 	i = 0;
-	while (i < len)
-	{
-		printf("%ld", data.stack_a[i]);
-		i++;
-	}
-	printf("\n");
-	i = 0;
+	printf("stack_b apres commande = \n");
 	while (i < len)
 	{
 		printf("%d", data.stack_b[i]);
