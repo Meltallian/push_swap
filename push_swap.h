@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 17:04:46 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/13 14:51:37 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,10 @@ void		sb(t_data *data);
 void		ss(t_data *data);
 void		pa(t_data *data);
 void		pb(t_data *data);
+void		ra(t_data *data);
+void		rb(t_data *data);
+void		rr(t_data *data);
+void		rra(t_data *data);
+void		rrb(t_data *data);
 
 #endif // PUSH_SWAP_H

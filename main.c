@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 19:00:36 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/13 14:53:31 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	init(t_data *data, int ac, char **av)
 {
 	if (ac < 2)
-		return (0);
+		exit (1);
 	if (ac == 2)
 		conver_string(data, av);
 	if (ac > 2)
@@ -52,12 +52,12 @@ int main(int ac, char **av) {
 
     printf("Before command:\n");
     print_stacks_side_by_side(&data);
-
-    // pb(&data); // Execute the command (modify the stacks as needed)
-	// pb(&data);
-	// pb(&data);
-	// pb(&data);
-	pa(&data);
+    pb(&data); // Execute the command (modify the stacks as needed)
+	pb(&data);
+	pb(&data);
+	pb(&data);
+	// pa(&data);
+	rrb(&data);
 
     printf("\nAfter command:\n");
     print_stacks_side_by_side(&data);

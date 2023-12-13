@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ops.c                                              :+:      :+:    :+:   */
+/*   swap_push.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/12 19:04:37 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/13 14:11:21 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void	ss(t_data *data)
 void	pa(t_data *data)
 {
 	int	i;
+	int	temp;
 
 	if (!data->stacks[B] || data->y_b == 0)
 		return ;
-	i = data->y_b - 1;
-	while (data->y_a - 1 >= 0)
+	i = data->y_a - 1;
+	while (i >= 0)
 	{
 		data->stacks[A][i + 1].value = data->stacks[A][i].value;
 		i--;
@@ -56,20 +57,23 @@ void	pa(t_data *data)
 	i = 0;
 	while (i < data->y_b - 1)
 	{
-		data->stacks[B][i] = data->stacks[B][i + 1];
+		temp = data->stacks[B][i + 1].value;
+		data->stacks[B][i].value = temp;
 		i++;
 	}
+	data->stacks[B][i].value = 0;
+//	data->stacks[B][i].mod = E_MOD;
 	data->y_a++;
 	data->y_b--;
 }
 
 void	pb(t_data *data)
 {
-	int i;
-	int temp;
+	int	i;
+	int	temp;
 
-	if (!data->stacks[A])
-		return;
+	if (!data->stacks[A] || data->y_a == 0)
+		return ;
 	i = data->y_b - 1;
 	while (i >= 0)
 	{
@@ -86,6 +90,7 @@ void	pb(t_data *data)
 		i++;
 	}
 	data->stacks[A][i].value = 0;
+//	data->stacks[A][i].mod = E_MOD;
 	data->y_a--;
 	data->y_b++;
 }
