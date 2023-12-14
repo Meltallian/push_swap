@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/13 14:51:37 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/14 17:57:52 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data {
 	char		*line;
 	int			y_a;
 	int			y_b;
+	int			*cal;
 	t_kill		kill;
 	t_ato		ato;
 }	t_data;
@@ -75,5 +76,6 @@ void		rb(t_data *data);
 void		rr(t_data *data);
 void		rra(t_data *data);
 void		rrb(t_data *data);
+void		master(t_data *data);
 
 #endif // PUSH_SWAP_H

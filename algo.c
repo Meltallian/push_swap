@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/14 16:33:30 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/14 18:01:12 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,49 @@ int	find_big_b(t_data *data)
 	return (0);
 }
 
-void	calcul(t_data *data)
+int	calcul(t_data *data, int i)
+{
+/* 	int	j;
+
+	j = 0; */
+	if (a_big_small(data, i) == 1)
+	{
+		if (find_big_b(data) == 0)
+			return (1);
+	}
+	return (0);
+}
+/**
+ * @brief This function stores and returns potential operation amounts
+ * in a array of int for each int in stack A.
+ * The results of the calculus is the number of operations needed for the int
+ * from stack A to be moved correctly on top of stack B.
+ * @param data
+ */
+void	calculus_array(t_data *data)
 {
 	int	i;
-	int	*count[data->y_a];
 	int	temp;
 
 	i = 0;
 	while (i < data->y_a)
 	{
-		if (a_big_small(data, data->stacks[B][i].value) == 1)
-		{
-
-		}
-		temp = a_higher_than_b(data, i);
-		count[i] = temp;
+		temp = calcul(data, i);
+		data->cal[i] = temp;
 		i++;
 	}
+}
+/**
+ * @brief This function actually does the moving based on the calculus.
+ *
+ * @param data
+ */
+void master(t_data *data)
+{
+/* 	int	i;
+
+	i = 0; */
+	calculus_array(data);
+	if (data->cal[0] == 1)
+		pb(data);
 }

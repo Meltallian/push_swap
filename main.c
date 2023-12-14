@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/13 14:53:31 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/14 17:57:31 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	init(t_data *data, int ac, char **av)
 	mode_allow(data);
 	data->kill.stack = 0;
 	data->kill.tab = 0;
+	data->cal = malloc(data->y_a * sizeof(int));
+	if (data->cal == NULL)
+		return (0);
+	pb(data);
+	pb(data);
 	return (0);
 }
 
@@ -52,16 +57,15 @@ int main(int ac, char **av) {
 
     printf("Before command:\n");
     print_stacks_side_by_side(&data);
-    pb(&data); // Execute the command (modify the stacks as needed)
-	pb(&data);
-	pb(&data);
-	pb(&data);
+    // pb(&data); // Execute the command (modify the stacks as needed)
+	// pb(&data);
+	// pb(&data);
+	// pb(&data);
 	// pa(&data);
-	rrb(&data);
-
+	// rrb(&data);
+	master(&data);
     printf("\nAfter command:\n");
     print_stacks_side_by_side(&data);
-
     clean(&data); // Clean up resources
     return 0;
 }
