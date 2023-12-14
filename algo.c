@@ -6,15 +6,15 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/14 18:01:12 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/14 18:49:16 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 /**
  * @brief This function checks if the int from stack A is
- * higher than all int from stack B or lower than all int
- * from stack B. if it is, it returns 1.
+ * higher than all int from stack B (returns 1) or lower than all int
+ * from stack B (returns 2).
  * @param data
  * @param index
  * @return int
@@ -33,8 +33,10 @@ int	a_big_small(t_data *data, int index)
 			count++;
 		i++;
 	}
-	if (count == i || count == 0)
+	if (count == i)
 		return (1);
+	if (count == 0)
+		return (2);
 	return (0);
 }
 /**
@@ -72,10 +74,9 @@ int	calcul(t_data *data, int i)
 
 	j = 0; */
 	if (a_big_small(data, i) == 1)
-	{
-		if (find_big_b(data) == 0)
-			return (1);
-	}
+		return (1);
+	if (a_big_small(data, i) == 2)
+		return (2);
 	return (0);
 }
 /**
@@ -111,4 +112,9 @@ void master(t_data *data)
 	calculus_array(data);
 	if (data->cal[0] == 1)
 		pb(data);
+	if (data->cal[0] == 2)
+	{
+		pb(data);
+		rb(data);
+	}
 }
