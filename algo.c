@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/14 18:49:16 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/15 10:52:42 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return int
  */
 
-int	a_big_small(t_data *data, int index)
+int	int_a_max_or_min(t_data *data, int index)
 {
 	int	i;
 	int	count;
@@ -41,7 +41,8 @@ int	a_big_small(t_data *data, int index)
 }
 /**
  * @brief This function finds the index of the highest int
- * in stack B and returns it.
+ * in stack B and returns it. Obsolete since highest int should
+ * always be on top of stack B.
  * @param data
  * @return int
  */
@@ -67,16 +68,70 @@ int	find_big_b(t_data *data)
 	}
 	return (0);
 }
+/**
+ * @brief Calculates the amount of rotations needed for index int
+ * to get placed at the top of stack A based on where int is in
+ * stack A.
+ * @param data
+ * @param index
+ * @return int
+ */
+int	calculate_rotations_for_a(t_data *data, int index)
+{
+	int	midpoint;
+	int	rotations;
 
-int	calcul(t_data *data, int i)
+	midpoint = data->y_a / 2;
+	if (index <= midpoint)
+		rotations = index;
+	else
+		rotations = data->y_a - index;
+	return (rotations);
+}
+/**
+ * @brief calculates
+ *
+ * @param data
+ * @param index
+ * @return int
+ */
+int	mid_stack_b(t_data *data, int index)
+{
+	int	i;
+	int	rotations_needed;
+
+	rotations_needed = 0;
+	i = data->y_b - 1;
+	while (i >= 0)
+	{
+		if (data->stacks[B][index].value > data->stacks[A][i].value)
+		{
+			rotations_needed = data->y_b - i;
+			break ;
+		}
+		i--;
+	}
+	return (/* rotations_needed + */ calculate_rotations_for_a(data, index));
+}
+
+/**
+ * @brief This functions does the calculus.
+ *
+ * @param data
+ * @param i
+ * @return int
+ */
+int	calcul(t_data *data, int index)
 {
 /* 	int	j;
 
 	j = 0; */
-	if (a_big_small(data, i) == 1)
-		return (1);
-	if (a_big_small(data, i) == 2)
-		return (2);
+	if (int_a_max_or_min(data, index) == 1)
+		return (index + 1);
+	if (int_a_max_or_min(data, index) == 2)
+		return (index + 1);
+	else
+		return (mid_stack_b(data, index));
 	return (0);
 }
 /**
@@ -88,15 +143,15 @@ int	calcul(t_data *data, int i)
  */
 void	calculus_array(t_data *data)
 {
-	int	i;
+	int	index;
 	int	temp;
 
-	i = 0;
-	while (i < data->y_a)
+	index = 0;
+	while (index < data->y_a)
 	{
-		temp = calcul(data, i);
-		data->cal[i] = temp;
-		i++;
+		temp = calcul(data, index);
+		data->cal[index] = temp;
+		index++;
 	}
 }
 /**
@@ -106,15 +161,20 @@ void	calculus_array(t_data *data)
  */
 void master(t_data *data)
 {
-/* 	int	i;
+	int	i;
 
-	i = 0; */
+	i = 0;
 	calculus_array(data);
-	if (data->cal[0] == 1)
+/* 	if (data->cal[0] == 1)
 		pb(data);
 	if (data->cal[0] == 2)
 	{
 		pb(data);
 		rb(data);
+	} */
+	while (i < data->y_a)
+	{
+		printf("%d", data->cal[i]);
+		i++;
 	}
 }
