@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/14 17:57:52 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/15 11:03:36 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 
 # define V_MOD 1
 
+typedef struct s_rota_info {
+	int		rotations;
+	char	direction;
+}	t_rota_info;
 typedef struct s_kill {
 	int	tab;
 	int	stack;

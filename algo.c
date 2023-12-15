@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/15 10:52:42 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/15 11:36:10 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	int_a_max_or_min(t_data *data, int index)
 		return (2);
 	return (0);
 }
+
 /**
  * @brief This function finds the index of the highest int
  * in stack B and returns it. Obsolete since highest int should
@@ -68,6 +69,7 @@ int	find_big_b(t_data *data)
 	}
 	return (0);
 }
+
 /**
  * @brief Calculates the amount of rotations needed for index int
  * to get placed at the top of stack A based on where int is in
@@ -88,6 +90,7 @@ int	calculate_rotations_for_a(t_data *data, int index)
 		rotations = data->y_a - index;
 	return (rotations);
 }
+
 /**
  * @brief calculates
  *
@@ -95,23 +98,31 @@ int	calculate_rotations_for_a(t_data *data, int index)
  * @param index
  * @return int
  */
-int	mid_stack_b(t_data *data, int index)
+t_rota_info	mid_stack_b(t_data *data, int index)
 {
-	int	i;
-	int	rotations_needed;
+	int			midpoint;
+	int			i;
+	t_rota_info	info;
 
-	rotations_needed = 0;
+	info.rotations = 0;
+	info.direction = 'n';
 	i = data->y_b - 1;
+	midpoint = data->y_b / 2;
 	while (i >= 0)
 	{
 		if (data->stacks[B][index].value > data->stacks[A][i].value)
 		{
-			rotations_needed = data->y_b - i;
+			info.rotations = data->y_b - i;
 			break ;
 		}
 		i--;
 	}
-	return (/* rotations_needed + */ calculate_rotations_for_a(data, index));
+	if (info.rotations > midpoint)
+	{
+		info.rotations = data->y_b - info.rotations;
+		info.direction = 'r';
+	}
+	return (info);
 }
 
 /**
@@ -131,9 +142,10 @@ int	calcul(t_data *data, int index)
 	if (int_a_max_or_min(data, index) == 2)
 		return (index + 1);
 	else
-		return (mid_stack_b(data, index));
+		return (mid_stack_b(data, index).rotations + calculate_rotations_for_a(data, index) + 1);
 	return (0);
 }
+
 /**
  * @brief This function stores and returns potential operation amounts
  * in a array of int for each int in stack A.
@@ -154,12 +166,13 @@ void	calculus_array(t_data *data)
 		index++;
 	}
 }
+
 /**
  * @brief This function actually does the moving based on the calculus.
  *
  * @param data
  */
-void master(t_data *data)
+void	master(t_data *data)
 {
 	int	i;
 
