@@ -19,7 +19,7 @@ $(LIBFT):
 	make -C ./libft
 
 $(NAME): $(LIBFT) $(PUSH_SWAP_OBJ)
-	$(CC) $(PUSH_SWAP_OBJ) $(LIBFT) -o $(NAME) -L./libft -lft
+	$(CC) $(CFLAGS) $(PUSH_SWAP_OBJ) $(LIBFT) -o $(NAME) -L./libft -lft
 
 clean:
 	make clean -C ./libft

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/15 09:45:26 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/15 14:13:12 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int main(int ac, char **av) {
     printf("Before command:\n");
     print_stacks_side_by_side(&data);
     // pb(&data); // Execute the command (modify the stacks as needed)
+	pb(&data);
+	pb(&data);
 	// pb(&data);
-	pb(&data);
-	pb(&data);
 	// pa(&data);
 	// rrb(&data);
 
