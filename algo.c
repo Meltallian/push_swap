@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/18 15:20:21 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:38:23 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	if_big_b_top(t_data *data)
 	}
 	i = 0;
 	if (temp == data->stacks[B][0].value)
-			return (1);
+		return (1);
 	return (0);
 }
 
@@ -45,7 +45,7 @@ int	if_big_b_top(t_data *data)
  * @return int
  */
 
-int	int_a_max_or_min(t_data *data, int index)
+int	is_max_or_min(t_data *data, int index)
 {
 	int	i;
 	int	count;
@@ -75,7 +75,7 @@ int	int_a_max_or_min(t_data *data, int index)
  */
 t_rota_info	rota_for_a(t_data *data, int index)
 {
-	int	midpoint;
+	int			midpoint;
 	t_rota_info	rot;
 
 	rot.direction = 'n';
@@ -125,6 +125,45 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	return (info);
 }
 
+void	three_left(t_data *data)
+{
+	int	temp;
+
+	temp = 0;
+	if (data->stacks[A][0].value > data->stacks[A][0 + 1].value)
+	{
+		temp = data->stacks[A][0 + 1].value;
+		data->stacks[A][0 + 1].value = data->stacks[A][0].value;
+		data->stacks[A][0].value = temp;
+	}
+	if (data->stacks[A][0].value > data->stacks[A][0 + 2].value)
+	{
+		temp = data->stacks[A][0 + 2].value;
+		data->stacks[A][0 + 2].value = data->stacks[A][0].value;
+		data->stacks[A][0].value = temp;
+	}
+	if (data->stacks[A][0].value > data->stacks[A][0 + 1].value)
+	{
+		temp = data->stacks[A][0 + 1].value;
+		data->stacks[A][0 + 1].value = data->stacks[A][0].value;
+		data->stacks[A][0].value = temp;
+	}
+	if (data->stacks[A][0 + 1].value > data->stacks[A][0 + 2].value)
+	{
+		temp = data->stacks[A][0 + 2].value;
+		data->stacks[A][0 + 2].value = data->stacks[A][0 + 1].value;
+		data->stacks[A][0 + 1].value = temp;
+	}
+}
+
+/**
+ * @brief calculates number of operations if index stack A is
+ * a maximum or a minimum in stack B
+ * @param data
+ * @param index
+ * @return int
+ */
+
 int	calcul_max_min_special(t_data *data, int index)
 {
 	int		rotations_a;
@@ -148,10 +187,35 @@ int	calcul_max_min_special(t_data *data, int index)
 	if (if_big_b_top(data) == 0)
 		rotations_b = 1;
 	if (direction_a == 'n' && rotations_b > 0 && rotations_a > 0)
-		total_rotations = rotations_a;
+		total_rotations = rotations_a + 1;
 	else
-		total_rotations = rotations_a + rotations_b;
-	total_rotations += 1;
+		total_rotations = rotations_a + rotations_b + 1;
+	return (total_rotations);
+}
+
+int	calcul_utils(t_data *data, int index)
+{
+	int					total_rotations;
+	int					add_rota_a;
+	int					add_rota_b;
+	const t_rota_info	rota_info_a = rota_for_a(data, index);
+	const t_rota_info	rota_info_b = rota_for_b(data, index);
+
+	total_rotations = 0;
+	add_rota_a = 0;
+	add_rota_b = 0;
+	if (rota_info_a.rotations == 0 && rota_info_b.rotations == 0)
+		total_rotations = 1;
+	else if (rota_info_a.direction == rota_info_b.direction)
+	{
+		total_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
+		total_rotations += max(rota_info_a.rotations
+				- min(rota_info_a.rotations, rota_info_b.rotations), 0)
+			+ max(rota_info_b.rotations
+				- min(rota_info_a.rotations, rota_info_b.rotations), 0) + 1;
+	}
+	else
+		total_rotations = rota_info_a.rotations + rota_info_b.rotations + 1;
 	return (total_rotations);
 }
 
@@ -164,33 +228,11 @@ int	calcul_max_min_special(t_data *data, int index)
  */
 int	calcul(t_data *data, int index)
 {
-	int					total_rotations;
-	int					combined_rotations;
-	int					add_rota_a;
-	int					add_rota_b;
-	const t_rota_info	rota_info_a = rota_for_a(data, index);
-	const t_rota_info	rota_info_b = rota_for_b(data, index);
-
-	total_rotations = 0;
-	add_rota_a = 0;
-	add_rota_b = 0;
-	if (int_a_max_or_min(data, index) != 0)
+	if (is_max_or_min(data, index) != 0)
 		return (calcul_max_min_special(data, index));
-	if (int_a_max_or_min(data, index) == 0)
-	{
-		if (rota_info_a.rotations == 0 && rota_info_b.rotations == 0)
-			total_rotations = 1;
-		else if (rota_info_a.direction == rota_info_b.direction)
-		{
-			combined_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
-			total_rotations = combined_rotations;
-			total_rotations += max(rota_info_a.rotations - combined_rotations, 0)
-				+ max(rota_info_b.rotations - combined_rotations, 0) + 1;
-		}
-		else
-			total_rotations = rota_info_a.rotations + rota_info_b.rotations + 1;
-	}
-	return (total_rotations);
+	if (is_max_or_min(data, index) == 0)
+		return (calcul_utils(data, index));
+	return (0);
 }
 
 /**
