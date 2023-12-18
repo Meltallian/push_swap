@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:41:29 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/15 15:32:28 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/18 11:30:13 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ size_t	ft_strcspn(const char *s1, const char *s2)
 int	min(int a, int b)
 {
 	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
+int max(int a, int b)
+{
+	if (a > b)
 		return (a);
 	else
 		return (b);

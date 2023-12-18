@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/15 15:40:15 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/18 12:08:25 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,26 +125,11 @@ t_rota_info	mid_stack_b(t_data *data, int index)
 	return (info);
 }
 
-/**
- * @brief This functions does the calculus.
- *
- * @param data
- * @param i
- * @return int
- */
-int	calcul(t_data *data, int index)
+int	calcul_max_min(t_data *data, int index)
 {
-	int			midpoint;
-	int			total_rotations;
-	int			combined_rotations;
-	t_rota_info	rota_info_a;
-	t_rota_info	rota_info_b;
+	int midpoint;
 
-	total_rotations = 0;
-	midpoint = data->y_a / 2;
-	rota_info_a = rota_for_a(data, index);
-	rota_info_b = mid_stack_b(data, index);
-	combined_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
+	midpoint = data->y_a /2;
 	if (int_a_max_or_min(data, index) == 1
 		|| int_a_max_or_min(data, index) == 2)
 	{
@@ -157,12 +142,49 @@ int	calcul(t_data *data, int index)
 		if (index > midpoint)
 			return (data->y_a - index + 2);
 	}
+	return (0);
+}
+
+/**
+ * @brief This functions does the calculus.
+ *
+ * @param data
+ * @param i
+ * @return int
+ */
+int	calcul(t_data *data, int index)
+{
+	int			total_rotations;
+	int			combined_rotations;
+	int			add_rota_a;
+	int			add_rota_b;
+	t_rota_info	rota_info_a;
+	t_rota_info	rota_info_b;
+
+	total_rotations = 0;
+	add_rota_a = 0;
+	add_rota_b = 0;
+	rota_info_a = rota_for_a(data, index);
+	rota_info_b = mid_stack_b(data, index);
+	combined_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
+
+	printf("Index: %d, A Rotations: %d, A Direction: %c, B Rotations: %d, B Direction: %c\n",
+           index, rota_info_a.rotations, rota_info_a.direction, rota_info_b.rotations, rota_info_b.direction);
+/* 	if (!(int_a_max_or_min(data, index)))
+		return (calcul_max_min(data, index));
 	else
-	{
-		total_rotations = combined_rotations + (rota_info_a.rotations
-			- combined_rotations) + (rota_info_b.rotations
-			- combined_rotations) + 1;
-	}
+	{ */
+		if (rota_info_a.direction == rota_info_b.direction)
+		{
+			total_rotations = combined_rotations;
+			total_rotations += max(rota_info_a.rotations - combined_rotations, 0)
+				+ max(rota_info_b.rotations - combined_rotations, 0);
+		}
+		else
+			total_rotations = rota_info_a.rotations + rota_info_b.rotations;
+/* 	} */
+	total_rotations += 1; //for final push
+    printf("Total Rotations for index %d: %d\n", index, total_rotations);
 	return (total_rotations);
 }
 

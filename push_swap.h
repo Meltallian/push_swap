@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/15 15:32:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/18 11:23:18 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void		rr(t_data *data);
 void		rra(t_data *data);
 void		rrb(t_data *data);
 int			min(int a, int b);
+int			max(int a, int b);
 void		master(t_data *data);
 
 #endif // PUSH_SWAP_H
