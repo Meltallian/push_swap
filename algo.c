@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/18 12:08:25 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/18 15:20:21 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_rota_info	rota_for_a(t_data *data, int index)
  * @param index
  * @return int
  */
-t_rota_info	mid_stack_b(t_data *data, int index)
+t_rota_info	rota_for_b(t_data *data, int index)
 {
 	int			midpoint;
 	int			i;
@@ -125,24 +125,34 @@ t_rota_info	mid_stack_b(t_data *data, int index)
 	return (info);
 }
 
-int	calcul_max_min(t_data *data, int index)
+int	calcul_max_min_special(t_data *data, int index)
 {
-	int midpoint;
+	int		rotations_a;
+	char	direction_a;
+	int		midpoint_a;
+	int		rotations_b;
+	int		total_rotations;
 
-	midpoint = data->y_a /2;
-	if (int_a_max_or_min(data, index) == 1
-		|| int_a_max_or_min(data, index) == 2)
+	rotations_a = 0;
+	total_rotations = 0;
+	rotations_b = 0;
+	direction_a = 'n';
+	midpoint_a = data->y_a / 2;
+	if (index <= midpoint_a)
+		rotations_a = index;
+	else
 	{
-		if (index <= midpoint && if_big_b_top(data) == 1)
-			return (index + 1);
-		if (index > midpoint && if_big_b_top(data) == 1)
-			return (data->y_a - index + 1);
-		if (index <= midpoint)
-			return (index + 2);
-		if (index > midpoint)
-			return (data->y_a - index + 2);
+		rotations_a = data->y_a - index;
+		direction_a = 'r';
 	}
-	return (0);
+	if (if_big_b_top(data) == 0)
+		rotations_b = 1;
+	if (direction_a == 'n' && rotations_b > 0 && rotations_a > 0)
+		total_rotations = rotations_a;
+	else
+		total_rotations = rotations_a + rotations_b;
+	total_rotations += 1;
+	return (total_rotations);
 }
 
 /**
@@ -154,37 +164,32 @@ int	calcul_max_min(t_data *data, int index)
  */
 int	calcul(t_data *data, int index)
 {
-	int			total_rotations;
-	int			combined_rotations;
-	int			add_rota_a;
-	int			add_rota_b;
-	t_rota_info	rota_info_a;
-	t_rota_info	rota_info_b;
+	int					total_rotations;
+	int					combined_rotations;
+	int					add_rota_a;
+	int					add_rota_b;
+	const t_rota_info	rota_info_a = rota_for_a(data, index);
+	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
 	total_rotations = 0;
 	add_rota_a = 0;
 	add_rota_b = 0;
-	rota_info_a = rota_for_a(data, index);
-	rota_info_b = mid_stack_b(data, index);
-	combined_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
-
-	printf("Index: %d, A Rotations: %d, A Direction: %c, B Rotations: %d, B Direction: %c\n",
-           index, rota_info_a.rotations, rota_info_a.direction, rota_info_b.rotations, rota_info_b.direction);
-/* 	if (!(int_a_max_or_min(data, index)))
-		return (calcul_max_min(data, index));
-	else
-	{ */
-		if (rota_info_a.direction == rota_info_b.direction)
+	if (int_a_max_or_min(data, index) != 0)
+		return (calcul_max_min_special(data, index));
+	if (int_a_max_or_min(data, index) == 0)
+	{
+		if (rota_info_a.rotations == 0 && rota_info_b.rotations == 0)
+			total_rotations = 1;
+		else if (rota_info_a.direction == rota_info_b.direction)
 		{
+			combined_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
 			total_rotations = combined_rotations;
 			total_rotations += max(rota_info_a.rotations - combined_rotations, 0)
-				+ max(rota_info_b.rotations - combined_rotations, 0);
+				+ max(rota_info_b.rotations - combined_rotations, 0) + 1;
 		}
 		else
-			total_rotations = rota_info_a.rotations + rota_info_b.rotations;
-/* 	} */
-	total_rotations += 1; //for final push
-    printf("Total Rotations for index %d: %d\n", index, total_rotations);
+			total_rotations = rota_info_a.rotations + rota_info_b.rotations + 1;
+	}
 	return (total_rotations);
 }
 
