@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:41:29 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/18 11:30:13 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 16:38:26 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,27 @@ int max(int a, int b)
 		return (a);
 	else
 		return (b);
+}
+
+/**
+ * @brief check whether stack a is fully sorted (1).
+ * also checks whether it is full. return -1 if not full
+ * and 0 if not sorted.
+ * @param data
+ * @return int
+ */
+int	is_stack_a_sorted(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->y_a != data->length_tot)
+		return (-1);
+	while (i < data->length_tot - 1)
+	{
+		if (data->stacks[A][i].value > data->stacks[A][i + 1].value)
+			return (0);
+		i++;
+	}
+	return (1);
 }

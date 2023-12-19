@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/19 15:29:21 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 16:24:21 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,12 @@ void	calculus_array(t_data *data)
 	}
 }
 
+/**
+ * @brief This function returns the index in stack A that has
+ * the smallest amount of potential moves.
+ * @param data
+ * @return int
+ */
 int	index_to_move(t_data *data)
 {
 	int	i;
@@ -279,6 +285,12 @@ int	index_to_move(t_data *data)
 	return (index);
 }
 
+/**
+ * @brief Helper for same_dir function, stack b side.
+ *
+ * @param data
+ * @param rota_info_a
+ */
 void	diff_dir_a(t_data *data, t_rota_info rota_info_a)
 {
 	int	i;
@@ -296,6 +308,12 @@ void	diff_dir_a(t_data *data, t_rota_info rota_info_a)
 	}
 }
 
+/**
+ * @brief helper for same_dir function, stack b side.
+ *
+ * @param data
+ * @param rota_info_b
+ */
 void	diff_dir_b(t_data *data, t_rota_info rota_info_b)
 {
 	int	i;
@@ -389,7 +407,14 @@ void	same_dir_rota_b_helper(t_data *data, t_rota_info info_b, int rot_b)
 	}
 }
 
-void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b, int index)
+/**
+ * @brief function that does the operation if both direction are similar.
+ *
+ * @param data
+ * @param info_a
+ * @param info_b
+ */
+void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b)
 {
 	const int	combined = min(info_a.rotations, info_b.rotations);
 	int			rot_a;
@@ -403,26 +428,33 @@ void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b, int index)
 	pb(data);
 }
 
-int	index_ope(t_data *data)
+/**
+ * @brief master function leading the way for operations based
+ * on wheter same direction, not same, depending on size of stack.
+ * @param data
+ * @return int
+ */
+void	index_ope(t_data *data)
 {
 	const int			index = index_to_move(data);
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
+	// while ()
 	if (data->y_a == 2)
 		two_left(data);
-	if (data->y_a == 3)
+	else if (data->y_a == 3)
 		three_left(data);
 	else if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
-		same_dir(data, rota_info_a, rota_info_b, index);
+		same_dir(data, rota_info_a, rota_info_b);
 	else if (rota_for_a(data, index).direction != rota_for_b(data, index).direction)
 	{
 		diff_dir_a(data, rota_info_a);
 		diff_dir_b(data, rota_info_b);
 		pb(data);
 	}
-
 }
+
 /**
  * @brief This function actually does the moving based on the calculus.
  *
@@ -434,17 +466,11 @@ void	master(t_data *data)
 
 	i = 0;
 	calculus_array(data);
-/* 	if (data->cal[0] == 1)
-		pb(data);
-	if (data->cal[0] == 2)
-	{
-		pb(data);
-		rb(data);
-	} */
 	while (i < data->y_a)
 	{
 		printf("%d", data->cal[i]);
 		i++;
 	}
 	printf("%d", index_to_move(data));
+	index_ope(data);
 }

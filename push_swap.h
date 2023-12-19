@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/18 11:23:18 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 16:38:41 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_data {
 	char		*line;
 	int			y_a;
 	int			y_b;
+	int			length_tot;
 	int			*cal;
 	t_kill		kill;
 	t_ato		ato;
@@ -80,8 +81,10 @@ void		rb(t_data *data);
 void		rr(t_data *data);
 void		rra(t_data *data);
 void		rrb(t_data *data);
+void		rrr(t_data *data);
 int			min(int a, int b);
 int			max(int a, int b);
 void		master(t_data *data);
+int			is_stack_a_sorted(t_data *data);
 
 #endif // PUSH_SWAP_H

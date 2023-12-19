@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/15 14:13:12 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 16:24:50 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int main(int ac, char **av) {
     printf("\nAfter command:\n");
     print_stacks_side_by_side(&data);
 	master(&data);
+//	master(&data);
+//	master(&data);
     clean(&data); // Clean up resources
     return 0;
 }
