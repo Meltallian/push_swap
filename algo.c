@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/19 13:56:47 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 15:29:21 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,20 +313,113 @@ void	diff_dir_b(t_data *data, t_rota_info rota_info_b)
 	}
 }
 
+/**
+ * @brief helper for the same_dir function that does the operation
+ * for combined rotations.
+ *
+ * @param data
+ * @param info
+ * @param combined
+ */
+void	same_dir_combined_utils(t_data *data, t_rota_info info, int combined)
+{
+	int	i;
+
+	i = 0;
+	while (i < combined - 1 && info.direction == 'n')
+	{
+		rr(data);
+		i++;
+	}
+	i = 0;
+	while (i < combined - 1 && info.direction == 'r')
+	{
+		rrr(data);
+		i++;
+	}
+}
+
+/**
+ * @brief helper function to rotate stack A.
+ *
+ * @param data
+ * @param info_a
+ * @param rot_a
+ */
+void	same_dir_rota_a_helper(t_data *data, t_rota_info info_a, int rot_a)
+{
+	int	i;
+
+	i = 0;
+	while (i < rot_a - 1 && info_a.direction == 'n')
+	{
+		ra(data);
+		i++;
+	}
+	i = 0;
+	while (i < rot_a - 1 && info_a.direction == 'r')
+	{
+		rra(data);
+		i++;
+	}
+}
+
+/**
+ * @brief helper function that does the rotation for stack B
+ *
+ * @param data
+ * @param info_b
+ * @param rot_b
+ */
+void	same_dir_rota_b_helper(t_data *data, t_rota_info info_b, int rot_b)
+{
+	int	i;
+
+	i = 0;
+	while (i < rot_b - 1 && info_b.direction == 'n')
+	{
+		rb(data);
+		i++;
+	}
+	i = 0;
+		while (i < rot_b - 1 && info_b.direction == 'r')
+	{
+		rrb(data);
+		i++;
+	}
+}
+
+void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b, int index)
+{
+	const int	combined = min(info_a.rotations, info_b.rotations);
+	int			rot_a;
+	int			rot_b;
+
+	rot_a = info_a.rotations - combined;
+	rot_b = info_b.rotations - combined;
+	same_dir_combined_utils(data, info_a, combined);
+	same_dir_rota_a_helper(data, info_a, rot_a);
+	same_dir_rota_b_helper(data, info_b, rot_b);
+	pb(data);
+}
+
 int	index_ope(t_data *data)
 {
-	int					i;
 	const int			index = index_to_move(data);
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
-	i = 0;
-	if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
-
-	else
+	if (data->y_a == 2)
+		two_left(data);
+	if (data->y_a == 3)
+		three_left(data);
+	else if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
+		same_dir(data, rota_info_a, rota_info_b, index);
+	else if (rota_for_a(data, index).direction != rota_for_b(data, index).direction)
 	{
 		diff_dir_a(data, rota_info_a);
 		diff_dir_b(data, rota_info_b);
+		pb(data);
 	}
 
 }
