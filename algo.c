@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/19 11:56:41 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 13:56:47 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	return (info);
 }
 
-void	a_two(t_data *data)
+void	two_left(t_data *data)
 {
 	if (data->stacks[A][0].value > data->stacks[A][1].value)
 		sa(data);
@@ -154,7 +154,6 @@ void	three_left(t_data *data)
 		sa(data);
 	}
 }
-
 
 /**
  * @brief calculates number of operations if index stack A is
@@ -193,26 +192,29 @@ int	calcul_max_min_special(t_data *data, int index)
 	return (total_rotations);
 }
 
+/**
+ * @brief calculates number of operations when there are rotation overlapping
+ *
+ * @param data
+ * @param index
+ * @return int
+ */
 int	calcul_utils(t_data *data, int index)
 {
 	int					total_rotations;
-	int					add_rota_a;
-	int					add_rota_b;
+	int					combined_rota;
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
 	total_rotations = 0;
-	add_rota_a = 0;
-	add_rota_b = 0;
 	if (rota_info_a.rotations == 0 && rota_info_b.rotations == 0)
 		total_rotations = 1;
 	else if (rota_info_a.direction == rota_info_b.direction)
 	{
-		total_rotations = min(rota_info_a.rotations, rota_info_b.rotations);
-		total_rotations += max(rota_info_a.rotations
-				- min(rota_info_a.rotations, rota_info_b.rotations), 0)
-			+ max(rota_info_b.rotations
-				- min(rota_info_a.rotations, rota_info_b.rotations), 0) + 1;
+		combined_rota = min(rota_info_a.rotations, rota_info_b.rotations);
+		total_rotations = combined_rota;
+		total_rotations += (rota_info_a.rotations - combined_rota)
+			+ (rota_info_b.rotations - combined_rota) + 1;
 	}
 	else
 		total_rotations = rota_info_a.rotations + rota_info_b.rotations + 1;
@@ -256,6 +258,78 @@ void	calculus_array(t_data *data)
 	}
 }
 
+int	index_to_move(t_data *data)
+{
+	int	i;
+	int	temp;
+	int	index;
+
+	i = 1;
+	temp = data->cal[0];
+	index = 0;
+	while (i < data->y_a)
+	{
+		if(data->cal[i] < temp)
+		{
+			temp = data->cal[i];
+			index++;
+		}
+		i++;
+	}
+	return (index);
+}
+
+void	diff_dir_a(t_data *data, t_rota_info rota_info_a)
+{
+	int	i;
+
+	i = 0;
+	while (i < rota_info_a.rotations - 1 && rota_info_a.direction == 'n')
+	{
+		ra(data);
+		i++;
+	}
+	while (i < rota_info_a.rotations - 1 && rota_info_a.direction == 'r')
+	{
+		rra(data);
+		i++;
+	}
+}
+
+void	diff_dir_b(t_data *data, t_rota_info rota_info_b)
+{
+	int	i;
+
+	i = 0;
+	while (i < rota_info_b.rotations - 1 && rota_info_b.direction == 'n')
+	{
+		rb(data);
+		i++;
+	}
+	while (i < rota_info_b.rotations - 1 && rota_info_b.direction == 'r')
+	{
+		rrb(data);
+		i++;
+	}
+}
+
+int	index_ope(t_data *data)
+{
+	int					i;
+	const int			index = index_to_move(data);
+	const t_rota_info	rota_info_a = rota_for_a(data, index);
+	const t_rota_info	rota_info_b = rota_for_b(data, index);
+
+	i = 0;
+	if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
+
+	else
+	{
+		diff_dir_a(data, rota_info_a);
+		diff_dir_b(data, rota_info_b);
+	}
+
+}
 /**
  * @brief This function actually does the moving based on the calculus.
  *
@@ -279,4 +353,5 @@ void	master(t_data *data)
 		printf("%d", data->cal[i]);
 		i++;
 	}
+	printf("%d", index_to_move(data));
 }
