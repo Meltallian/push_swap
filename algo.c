@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/18 17:38:23 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 11:56:41 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
  */
 int	if_big_b_top(t_data *data)
 {
-	int	i;
-	int	temp;
+	int		i;
+	int		temp;
 
 	i = 0;
 	temp = data->stacks[B][i].value;
@@ -125,36 +125,36 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	return (info);
 }
 
+void	a_two(t_data *data)
+{
+	if (data->stacks[A][0].value > data->stacks[A][1].value)
+		sa(data);
+}
+
 void	three_left(t_data *data)
 {
-	int	temp;
+	const int	top = data->stacks[A][0].value;
+	const int	mid = data->stacks[A][1].value;
+	const int	bot = data->stacks[A][2].value;
 
-	temp = 0;
-	if (data->stacks[A][0].value > data->stacks[A][0 + 1].value)
+	if (top > mid && bot > mid)
+		rra(data);
+	if (top > mid && mid > bot)
 	{
-		temp = data->stacks[A][0 + 1].value;
-		data->stacks[A][0 + 1].value = data->stacks[A][0].value;
-		data->stacks[A][0].value = temp;
+		rra(data);
+		sa(data);
 	}
-	if (data->stacks[A][0].value > data->stacks[A][0 + 2].value)
+	if (mid > bot && bot > top)
+		sa(data);
+	if (bot > top && top > mid)
+		ra(data);
+	if (mid > top && top > bot)
 	{
-		temp = data->stacks[A][0 + 2].value;
-		data->stacks[A][0 + 2].value = data->stacks[A][0].value;
-		data->stacks[A][0].value = temp;
-	}
-	if (data->stacks[A][0].value > data->stacks[A][0 + 1].value)
-	{
-		temp = data->stacks[A][0 + 1].value;
-		data->stacks[A][0 + 1].value = data->stacks[A][0].value;
-		data->stacks[A][0].value = temp;
-	}
-	if (data->stacks[A][0 + 1].value > data->stacks[A][0 + 2].value)
-	{
-		temp = data->stacks[A][0 + 2].value;
-		data->stacks[A][0 + 2].value = data->stacks[A][0 + 1].value;
-		data->stacks[A][0 + 1].value = temp;
+		ra(data);
+		sa(data);
 	}
 }
+
 
 /**
  * @brief calculates number of operations if index stack A is

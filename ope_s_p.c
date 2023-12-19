@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_push.c                                        :+:      :+:    :+:   */
+/*   ope_s_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/13 14:11:21 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 11:54:12 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	sa(t_data *data)
 	temp = data->stacks[A][0].value;
 	data->stacks[A][0].value = data->stacks[A][1].value;
 	data->stacks[A][1].value = temp;
+	ft_printf("sa\n");
 }
 
 void	sb(t_data *data)
@@ -32,12 +33,14 @@ void	sb(t_data *data)
 	temp = data->stacks[B][0].value;
 	data->stacks[B][0].value = data->stacks[B][1].value;
 	data->stacks[B][1].value = temp;
+	ft_printf("sb\n");
 }
 
 void	ss(t_data *data)
 {
 	sa(data);
 	sb(data);
+	ft_printf("ss\n");
 }
 
 void	pa(t_data *data)
@@ -62,9 +65,9 @@ void	pa(t_data *data)
 		i++;
 	}
 	data->stacks[B][i].value = 0;
-//	data->stacks[B][i].mod = E_MOD;
 	data->y_a++;
 	data->y_b--;
+ft_printf("pa\n");
 }
 
 void	pb(t_data *data)
@@ -90,7 +93,7 @@ void	pb(t_data *data)
 		i++;
 	}
 	data->stacks[A][i].value = 0;
-//	data->stacks[A][i].mod = E_MOD;
 	data->y_a--;
 	data->y_b++;
+	ft_printf("pb\n");
 }

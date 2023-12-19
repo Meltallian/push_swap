@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:34:46 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/13 14:59:06 by jbidaux          ###   ########.fr       */
+/*   Updated: 2023/12/19 11:46:50 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	rra(t_data *data)
 		i--;
 	}
 	data->stacks[A][0].value = temp;
+	ft_printf("rra\n");
 }
 
 void	rrb(t_data *data)
@@ -40,10 +41,12 @@ void	rrb(t_data *data)
 		i--;
 	}
 	data->stacks[B][0].value = temp;
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_data *data)
 {
 	rra(data);
 	rrb(data);
+	ft_printf("rrr\n");
 }
