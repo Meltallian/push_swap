@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/19 16:38:41 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:57:17 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 # define E_MOD 0
 
 # define V_MOD 1
+
+# define D(xxx) printf("%d", xxx)
+
+# define S(xxx) printf("%c", xxx)
+
+# define P printf("prout")
 
 typedef struct s_rota_info {
 	int		rotations;

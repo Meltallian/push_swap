@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/19 16:55:07 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:02:21 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ t_rota_info	rota_for_a(t_data *data, int index)
 		rot.rotations = data->y_a - index;
 		rot.direction = 'r';
 	}
+/* 	D(rot.rotations);
+	S(rot.direction); */
 	return (rot);
 }
 
@@ -100,16 +102,17 @@ t_rota_info	rota_for_a(t_data *data, int index)
  */
 t_rota_info	rota_for_b(t_data *data, int index)
 {
-	int			midpoint;
+	const int	midpoint = data->y_b / 2;
 	int			i;
 	t_rota_info	info;
 
 	info.rotations = 0;
-	info.direction = 'n';
+	info.direction = 'r';
 	i = data->y_b - 1;
-	midpoint = data->y_b / 2;
 	while (i >= 0)
 	{
+		if (if_big_b_top(data) == 0)
+			i--;
 		if (data->stacks[A][index].value < data->stacks[B][i].value)
 		{
 			info.rotations = data->y_b - i - 1;
@@ -120,7 +123,7 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	if (info.rotations > midpoint)
 	{
 		info.rotations = data->y_b - info.rotations;
-		info.direction = 'r';
+		info.direction = 'n';
 	}
 	return (info);
 }
@@ -131,28 +134,46 @@ void	two_left(t_data *data)
 		sa(data);
 }
 
+void	three_left_utils(t_data *data, int top, int mid, int bot)
+{
+	if (mid > bot && bot > top)
+	{
+		rra(data);
+		sa(data);
+		return ;
+	}
+	if (mid > top && top > bot)
+	{
+		rra(data);
+		return ;
+	}
+}
+
 void	three_left(t_data *data)
 {
 	const int	top = data->stacks[A][0].value;
 	const int	mid = data->stacks[A][1].value;
 	const int	bot = data->stacks[A][2].value;
 
-	if (top > mid && bot > mid)
-		rra(data);
+	if (top < mid && mid < bot)
+		return ;
+	if (top > mid && bot > mid && top < bot)
+	{
+		sa(data);
+		return ;
+	}
+	if (top > mid && bot > mid && top > bot)
+	{
+		ra(data);
+		return ;
+	}
 	if (top > mid && mid > bot)
 	{
-		rra(data);
-		sa(data);
-	}
-	if (mid > bot && bot > top)
-		sa(data);
-	if (bot > top && top > mid)
-		ra(data);
-	if (mid > top && top > bot)
-	{
 		ra(data);
 		sa(data);
+		return ;
 	}
+	three_left_utils(data, top, mid, bot);
 }
 
 /**
@@ -296,12 +317,12 @@ void	diff_dir_a(t_data *data, t_rota_info rota_info_a)
 	int	i;
 
 	i = 0;
-	while (i < rota_info_a.rotations - 1 && rota_info_a.direction == 'n')
+	while (i < rota_info_a.rotations && rota_info_a.direction == 'n')
 	{
 		ra(data);
 		i++;
 	}
-	while (i < rota_info_a.rotations - 1 && rota_info_a.direction == 'r')
+	while (i < rota_info_a.rotations && rota_info_a.direction == 'r')
 	{
 		rra(data);
 		i++;
@@ -319,12 +340,13 @@ void	diff_dir_b(t_data *data, t_rota_info rota_info_b)
 	int	i;
 
 	i = 0;
-	while (i < rota_info_b.rotations - 1 && rota_info_b.direction == 'n')
+//	D(rota_info_b.rotations);
+	while (i < rota_info_b.rotations && rota_info_b.direction == 'n')
 	{
 		rb(data);
 		i++;
 	}
-	while (i < rota_info_b.rotations - 1 && rota_info_b.direction == 'r')
+	while (i < rota_info_b.rotations && rota_info_b.direction == 'r')
 	{
 		rrb(data);
 		i++;
@@ -344,13 +366,13 @@ void	same_dir_combined_utils(t_data *data, t_rota_info info, int combined)
 	int	i;
 
 	i = 0;
-	while (i < combined - 1 && info.direction == 'n')
+	while (i < combined && info.direction == 'n')
 	{
 		rr(data);
 		i++;
 	}
 	i = 0;
-	while (i < combined - 1 && info.direction == 'r')
+	while (i < combined && info.direction == 'r')
 	{
 		rrr(data);
 		i++;
@@ -369,13 +391,13 @@ void	same_dir_rota_a_helper(t_data *data, t_rota_info info_a, int rot_a)
 	int	i;
 
 	i = 0;
-	while (i < rot_a - 1 && info_a.direction == 'n')
+	while (i < rot_a && info_a.direction == 'n')
 	{
 		ra(data);
 		i++;
 	}
 	i = 0;
-	while (i < rot_a - 1 && info_a.direction == 'r')
+	while (i < rot_a && info_a.direction == 'r')
 	{
 		rra(data);
 		i++;
@@ -394,13 +416,13 @@ void	same_dir_rota_b_helper(t_data *data, t_rota_info info_b, int rot_b)
 	int	i;
 
 	i = 0;
-	while (i < rot_b - 1 && info_b.direction == 'n')
+	while (i < rot_b && info_b.direction == 'n')
 	{
 		rb(data);
 		i++;
 	}
 	i = 0;
-		while (i < rot_b - 1 && info_b.direction == 'r')
+	while (i < rot_b && info_b.direction == 'r')
 	{
 		rrb(data);
 		i++;
@@ -420,6 +442,7 @@ void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b)
 	int			rot_a;
 	int			rot_b;
 
+//	printf("%d", combined);
 	rot_a = info_a.rotations - combined;
 	rot_b = info_b.rotations - combined;
 	same_dir_combined_utils(data, info_a, combined);
@@ -436,15 +459,21 @@ void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b)
  */
 void	index_ope(t_data *data)
 {
-	const int			index = index_to_move(data);
+	int					index = index_to_move(data);
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
-	// while ()
+	printf("%d", rota_info_b.rotations);
+	S(rota_info_b.direction);
+	D(rota_info_a.rotations);
+	S(rota_info_a.direction);
 	if (data->y_a == 2)
 		two_left(data);
 	else if (data->y_a == 3)
+	{
 		three_left(data);
+			return ;
+	}
 	else if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
 		same_dir(data, rota_info_a, rota_info_b);
 	else if (rota_for_a(data, index).direction != rota_for_b(data, index).direction)
