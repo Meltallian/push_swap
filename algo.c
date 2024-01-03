@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/03 17:02:21 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/03 18:07:40 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	info.rotations = 0;
 	info.direction = 'r';
 	i = data->y_b - 1;
+	if (is_max_or_min(data, index) != 0)
+		{
+			if (if_big_b_top(data) == 0)
+				info.rotations = 1;
+			return (info);
+		}
 	while (i >= 0)
 	{
 		if (if_big_b_top(data) == 0)
@@ -122,6 +128,8 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	}
 	if (info.rotations > midpoint)
 	{
+		if (if_big_b_top(data) == 0)
+			info.rotations -= 1;
 		info.rotations = data->y_b - info.rotations;
 		info.direction = 'n';
 	}
@@ -206,7 +214,7 @@ int	calcul_max_min_special(t_data *data, int index)
 	}
 	if (if_big_b_top(data) == 0)
 		rotations_b = 1;
-	if (direction_a == 'n' && rotations_b > 0 && rotations_a > 0)
+	if (direction_a == 'r' && rotations_b > 0 && rotations_a > 0)
 		total_rotations = rotations_a + 1;
 	else
 		total_rotations = rotations_a + rotations_b + 1;
@@ -299,7 +307,7 @@ int	index_to_move(t_data *data)
 		if(data->cal[i] < temp)
 		{
 			temp = data->cal[i];
-			index++;
+			index = i;
 		}
 		i++;
 	}
@@ -463,10 +471,10 @@ void	index_ope(t_data *data)
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
-	printf("%d", rota_info_b.rotations);
-	S(rota_info_b.direction);
 	D(rota_info_a.rotations);
 	S(rota_info_a.direction);
+	printf("%d", rota_info_b.rotations);
+	S(rota_info_b.direction);
 	if (data->y_a == 2)
 		two_left(data);
 	else if (data->y_a == 3)
