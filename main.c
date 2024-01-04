@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 14:28:42 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 16:49:19 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,16 @@ int main(int ac, char **av) {
     printf("\nAfter master command:\n");
     print_stacks_side_by_side(&data);
 	master(&data);
-/*     printf("\nAfter master command:\n");
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
     print_stacks_side_by_side(&data);
 	master(&data);
     printf("\nAfter master command:\n");
@@ -87,7 +96,7 @@ int main(int ac, char **av) {
     print_stacks_side_by_side(&data);
 	master(&data);
     printf("\nAfter master command:\n");
-    print_stacks_side_by_side(&data); */
+    print_stacks_side_by_side(&data);
     clean(&data); // Clean up resources
     return 0;
 }

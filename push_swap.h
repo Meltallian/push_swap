@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 14:49:54 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 16:26:19 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void		three_left(t_data *data);
 int			index_max_b(t_data *data);
 int			if_big_b_top(t_data *data);
 int			is_max_or_min(t_data *data, int index);
+t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint);
 
 #endif // PUSH_SWAP_H

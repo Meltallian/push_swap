@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 14:49:11 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 16:50:51 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,26 @@ t_rota_info	rota_for_b(t_data *data, int index)
 {
 	const int	midpoint = data->y_b / 2;
 	int			i;
+	long int	temp;
 	t_rota_info	info;
 
 	info.rotations = 0;
 	info.direction = 'n';
-	i = data->y_b - 1;
+	temp = -2147483649;
+	i = 0;
 	if (is_max_or_min(data, index) != 0)
 		return (rota_for_b_helper(data, info, midpoint));
-	while (i >= 0)
+	while (i < data->y_b)
 	{
-		if (if_big_b_top(data) == 0 && i == data->y_b - 1)
-			i--;
-		if (data->stacks[A][index].value < data->stacks[B][i].value)
+		if (data->stacks[B][i].value < data->stacks[A][index].value)
 		{
-
-			info.rotations = data->y_b - i - 1;
-			break ;
+			if (data->stacks[B][i].value > temp)
+			{
+				temp = data->stacks[B][i].value;
+				info.rotations = i;
+			}
 		}
-		i--;
+		i++;
 	}
 	if (info.rotations > midpoint)
 	{
