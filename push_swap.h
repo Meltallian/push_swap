@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/03 16:57:17 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:43:20 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,11 @@ int			min(int a, int b);
 int			max(int a, int b);
 void		master(t_data *data);
 int			is_stack_a_sorted(t_data *data);
+int			index_max_b(t_data *data);
+void		diff_dir_a(t_data *data, t_rota_info rota_info_a);
+void		diff_dir_b(t_data *data, t_rota_info rota_info_b);
+void		same_dir_combined_utils(t_data *data, t_rota_info info, int combined);
+void		same_dir_rota_a_helper(t_data *data, t_rota_info info_a, int rot_a);
+void		same_dir_rota_b_helper(t_data *data, t_rota_info info_b, int rot_b);
 
 #endif // PUSH_SWAP_H

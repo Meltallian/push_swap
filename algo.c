@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/03 18:07:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:41:21 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
  */
 int	if_big_b_top(t_data *data)
 {
-	int		i;
-	int		temp;
+	int	i;
+	int	temp;
 
 	i = 0;
 	temp = data->stacks[B][i].value;
@@ -30,7 +30,6 @@ int	if_big_b_top(t_data *data)
 			temp = data->stacks[B][i].value;
 		i++;
 	}
-	i = 0;
 	if (temp == data->stacks[B][0].value)
 		return (1);
 	return (0);
@@ -66,6 +65,35 @@ int	is_max_or_min(t_data *data, int index)
 }
 
 /**
+ * @brief Returns index of max int in stack b
+ *
+ * @param data
+ * @return int
+ */
+int	index_max_b(t_data *data)
+{
+	int	i;
+	int	temp;
+	int	index;
+
+	i = 0;
+	index = 0;
+	temp = data->stacks[B][i].value;
+	while (i < data->y_b)
+	{
+		if (data->stacks[B][i].value > temp)
+		{
+			temp = data->stacks[B][i].value;
+			index = i;
+		}
+		i++;
+	}
+	if (temp == data->stacks[B][0].value)
+		return (0);
+	return (index);
+}
+
+/**
  * @brief Calculates the amount of rotations needed for index int
  * to get placed at the top of stack A based on where int is in
  * stack A.
@@ -94,6 +122,40 @@ t_rota_info	rota_for_a(t_data *data, int index)
 }
 
 /**
+ * @brief helper for rota_for_b. Includes if the int from A will be
+ * either a max or a min.
+ *
+ * @param data
+ * @param info
+ * @param index
+ * @param midpoint
+ */
+t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint)
+{
+	if (if_big_b_top(data) == 1)
+	{
+		info.rotations = 0;
+		info.direction = 'r';
+		return (info);
+	}
+	if (index_max_b(data) <= midpoint)
+	{
+		info.direction = 'n';
+		info.rotations = index_max_b(data);
+		// if (data->y_b == 2)
+		// 	info.rotations = 0;
+		return (info);
+	}
+	if (index_max_b(data) > midpoint)
+	{
+		info.direction = 'r';
+		info.rotations = data->y_b - index_max_b(data);
+		return (info);
+	}
+	return (info);
+}
+
+/**
  * @brief calculates number of rotations in stack b to account
  * for int index at the top of stack a.
  * @param data
@@ -107,20 +169,17 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	t_rota_info	info;
 
 	info.rotations = 0;
-	info.direction = 'r';
+	info.direction = 'n';
 	i = data->y_b - 1;
 	if (is_max_or_min(data, index) != 0)
-		{
-			if (if_big_b_top(data) == 0)
-				info.rotations = 1;
-			return (info);
-		}
+		return (rota_for_b_helper(data, info, midpoint));
 	while (i >= 0)
 	{
-		if (if_big_b_top(data) == 0)
+		if (if_big_b_top(data) == 0 && i == data->y_b - 1)
 			i--;
 		if (data->stacks[A][index].value < data->stacks[B][i].value)
 		{
+
 			info.rotations = data->y_b - i - 1;
 			break ;
 		}
@@ -128,10 +187,8 @@ t_rota_info	rota_for_b(t_data *data, int index)
 	}
 	if (info.rotations > midpoint)
 	{
-		if (if_big_b_top(data) == 0)
-			info.rotations -= 1;
 		info.rotations = data->y_b - info.rotations;
-		info.direction = 'n';
+		info.direction = 'r';
 	}
 	return (info);
 }
@@ -314,128 +371,6 @@ int	index_to_move(t_data *data)
 	return (index);
 }
 
-/**
- * @brief Helper for same_dir function, stack b side.
- *
- * @param data
- * @param rota_info_a
- */
-void	diff_dir_a(t_data *data, t_rota_info rota_info_a)
-{
-	int	i;
-
-	i = 0;
-	while (i < rota_info_a.rotations && rota_info_a.direction == 'n')
-	{
-		ra(data);
-		i++;
-	}
-	while (i < rota_info_a.rotations && rota_info_a.direction == 'r')
-	{
-		rra(data);
-		i++;
-	}
-}
-
-/**
- * @brief helper for same_dir function, stack b side.
- *
- * @param data
- * @param rota_info_b
- */
-void	diff_dir_b(t_data *data, t_rota_info rota_info_b)
-{
-	int	i;
-
-	i = 0;
-//	D(rota_info_b.rotations);
-	while (i < rota_info_b.rotations && rota_info_b.direction == 'n')
-	{
-		rb(data);
-		i++;
-	}
-	while (i < rota_info_b.rotations && rota_info_b.direction == 'r')
-	{
-		rrb(data);
-		i++;
-	}
-}
-
-/**
- * @brief helper for the same_dir function that does the operation
- * for combined rotations.
- *
- * @param data
- * @param info
- * @param combined
- */
-void	same_dir_combined_utils(t_data *data, t_rota_info info, int combined)
-{
-	int	i;
-
-	i = 0;
-	while (i < combined && info.direction == 'n')
-	{
-		rr(data);
-		i++;
-	}
-	i = 0;
-	while (i < combined && info.direction == 'r')
-	{
-		rrr(data);
-		i++;
-	}
-}
-
-/**
- * @brief helper function to rotate stack A.
- *
- * @param data
- * @param info_a
- * @param rot_a
- */
-void	same_dir_rota_a_helper(t_data *data, t_rota_info info_a, int rot_a)
-{
-	int	i;
-
-	i = 0;
-	while (i < rot_a && info_a.direction == 'n')
-	{
-		ra(data);
-		i++;
-	}
-	i = 0;
-	while (i < rot_a && info_a.direction == 'r')
-	{
-		rra(data);
-		i++;
-	}
-}
-
-/**
- * @brief helper function that does the rotation for stack B
- *
- * @param data
- * @param info_b
- * @param rot_b
- */
-void	same_dir_rota_b_helper(t_data *data, t_rota_info info_b, int rot_b)
-{
-	int	i;
-
-	i = 0;
-	while (i < rot_b && info_b.direction == 'n')
-	{
-		rb(data);
-		i++;
-	}
-	i = 0;
-	while (i < rot_b && info_b.direction == 'r')
-	{
-		rrb(data);
-		i++;
-	}
-}
 
 /**
  * @brief function that does the operation if both direction are similar.
@@ -473,7 +408,7 @@ void	index_ope(t_data *data)
 
 	D(rota_info_a.rotations);
 	S(rota_info_a.direction);
-	printf("%d", rota_info_b.rotations);
+	D(rota_info_b.rotations);
 	S(rota_info_b.direction);
 	if (data->y_a == 2)
 		two_left(data);
@@ -483,7 +418,9 @@ void	index_ope(t_data *data)
 			return ;
 	}
 	else if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
+	{
 		same_dir(data, rota_info_a, rota_info_b);
+	}
 	else if (rota_for_a(data, index).direction != rota_for_b(data, index).direction)
 	{
 		diff_dir_a(data, rota_info_a);

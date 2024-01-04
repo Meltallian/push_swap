@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/03 17:26:37 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:28:42 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int main(int ac, char **av) {
     printf("Before command:\n");
     print_stacks_side_by_side(&data);
     // pb(&data); // Execute the command (modify the stacks as needed)
-	pb(&data);
-	pb(&data);
-//	pb(&data);
+	// pb(&data);
+	// pb(&data);
+	// pb(&data);
 	// pb(&data);
 	// pa(&data);
 	// rrb(&data);
@@ -68,10 +68,26 @@ int main(int ac, char **av) {
     printf("\nAfter command:\n");
     print_stacks_side_by_side(&data);
 	master(&data);
-	// master(&data);
-	// master(&data);
     printf("\nAfter master command:\n");
     print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+/*     printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data);
+	master(&data);
+    printf("\nAfter master command:\n");
+    print_stacks_side_by_side(&data); */
     clean(&data); // Clean up resources
     return 0;
 }
