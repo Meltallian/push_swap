@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:42:10 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 14:42:20 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:44:12 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	diff_dir_b(t_data *data, t_rota_info rota_info_b)
 	int	i;
 
 	i = 0;
-//	D(rota_info_b.rotations);
 	while (i < rota_info_b.rotations && rota_info_b.direction == 'n')
 	{
 		rb(data);
