@@ -6,11 +6,85 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 16:50:51 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/05 18:42:46 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
+/**
+ * @brief calculates number of rotation needed in stack a
+ * to correctly fit index 0 of stack b into it. without the pa.
+ *
+ * @param data
+ * @return t_rota_info
+ */
+t_rota_info	rota_for_a_back(t_data *data)
+{
+	t_rota_info	rot;
+	const	int	midpoint = data->y_a / 2;
+	int			i;
+	long int	temp;
+
+	rot.rotations = 0;
+	rot.direction = 'n';
+	i = 0;
+	temp = -2147483649;
+	while (i < data->y_a)
+	{
+		if (data->stacks[A][i].value < data->stacks[B][0].value)
+		{
+			if (data->stacks[A][i].value > temp)
+			{
+				temp = data->stacks[A][i].value;
+				rot.rotations = i + 1;
+			}
+			if (temp < data->stacks[B][0].value &&
+				temp == data->stacks[A][data->y_a - 1].value)
+			{
+				rot.rotations = 0;
+				return (rot);
+			}
+		}
+		i++;
+	}
+	D(rot.rotations);
+	if (is_max_or_min_back(data) == 2)
+		rot.rotations = index_min_a(data);
+	if (rot.rotations > midpoint)
+	{
+		rot.rotations = data->y_a - rot.rotations;
+		rot.direction = 'r';
+	}
+	D(rot.rotations);
+	return (rot);
+}
+
+/**
+ * @brief pushed back ints from stack b to stack a and rotates
+ * stack a if needed
+ *
+ * @param data
+ */
+void	move_back_a(t_data *data)
+{
+	const t_rota_info	info = rota_for_a_back(data);
+	int	i;
+
+	i = 0;
+	while (i < info.rotations && info.direction == 'n')
+	{
+		ra(data);
+		i++;
+	}
+	while (i < info.rotations && info.direction == 'r')
+	{
+		rra(data);
+		i++;
+	}
+	pa(data);
+}
 
 /**
  * @brief Calculates the amount of rotations needed for index int
@@ -35,8 +109,6 @@ t_rota_info	rota_for_a(t_data *data, int index)
 		rot.rotations = data->y_a - index;
 		rot.direction = 'r';
 	}
-/* 	D(rot.rotations);
-	S(rot.direction); */
 	return (rot);
 }
 
@@ -61,8 +133,6 @@ t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint
 	{
 		info.direction = 'n';
 		info.rotations = index_max_b(data);
-		// if (data->y_b == 2)
-		// 	info.rotations = 0;
 		return (info);
 	}
 	if (index_max_b(data) > midpoint)
@@ -83,7 +153,7 @@ t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint
  */
 t_rota_info	rota_for_b(t_data *data, int index)
 {
-	const int	midpoint = data->y_b / 2;
+	const int	midpoint = data->y_b / 2 + 1;
 	int			i;
 	long int	temp;
 	t_rota_info	info;
@@ -257,7 +327,6 @@ void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b)
 	int			rot_a;
 	int			rot_b;
 
-//	printf("%d", combined);
 	rot_a = info_a.rotations - combined;
 	rot_b = info_b.rotations - combined;
 	same_dir_combined_utils(data, info_a, combined);
@@ -278,10 +347,6 @@ void	index_ope(t_data *data)
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
-	D(rota_info_a.rotations);
-	S(rota_info_a.direction);
-	D(rota_info_b.rotations);
-	S(rota_info_b.direction);
 	if (data->y_a == 2)
 		two_left(data);
 	else if (data->y_a == 3)
@@ -314,9 +379,9 @@ void	master(t_data *data)
 	calculus_array(data);
 	while (i < data->y_a)
 	{
-		printf("%d", data->cal[i]);
+		printf("%d,", data->cal[i]);
 		i++;
 	}
-	printf("%d", index_to_move(data));
+	D(index_to_move(data));
 	index_ope(data);
 }

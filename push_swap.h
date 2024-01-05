@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 16:26:19 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/05 17:20:16 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,10 @@ int			index_max_b(t_data *data);
 int			if_big_b_top(t_data *data);
 int			is_max_or_min(t_data *data, int index);
 t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint);
+t_rota_info	rota_for_a_back(t_data *data);
+void		move_back_a(t_data *data);
+int			index_min_a(t_data *data);
+int			is_max_or_min_back(t_data *data);
+void		rota_a_final(t_data *data);
 
 #endif // PUSH_SWAP_H

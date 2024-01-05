@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:41:29 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 14:49:29 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/05 17:28:19 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ int	is_stack_a_sorted(t_data *data)
 		i++;
 	}
 	return (1);
+}
+
+void	rota_a_final(t_data *data)
+{
+	t_rota_info			info;
+	const int			midpoint = data->y_a / 2;
+	int					i;
+
+	info.rotations = index_min_a(data);
+	info.direction = 'n';
+	i = 0;
+	if (info.rotations >= midpoint)
+	{
+		info.rotations =  data->y_a - info.rotations;
+		info.direction = 'r';
+	}
+	while (i < info.rotations && info.direction == 'n')
+	{
+		ra(data);
+		i++;
+	}
+	while (i < info.rotations && info.direction == 'r')
+	{
+		rra(data);
+		i++;
+	}
 }
