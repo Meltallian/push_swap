@@ -6,13 +6,13 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:48:27 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/04 16:45:35 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:51:43 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_rota_info	rota_for_b(t_data *data, int index)
+/* t_rota_info	rota_for_b(t_data *data, int index)
 {
 	const int	midpoint = data->y_b / 2;
 	int			i;
@@ -44,4 +44,4 @@ t_rota_info	rota_for_b(t_data *data, int index)
 		info.direction = 'r';
 	}
 	return (info);
-}
+} */

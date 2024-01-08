@@ -6,12 +6,24 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/05 18:42:46 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 12:22:55 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	rota_for_a_helper(t_data *data, t_rota_info *rot)
+{
+	const int	midpoint = data->y_a / 2;
+
+	if (is_max_or_min_back(data) == 2)
+		rot->rotations = index_min_a(data);
+	if (rot->rotations > midpoint)
+	{
+		rot->rotations = data->y_a - rot->rotations;
+		rot->direction = 'r';
+	}
+}
 
 /**
  * @brief calculates number of rotation needed in stack a
@@ -23,7 +35,6 @@
 t_rota_info	rota_for_a_back(t_data *data)
 {
 	t_rota_info	rot;
-	const	int	midpoint = data->y_a / 2;
 	int			i;
 	long int	temp;
 
@@ -49,15 +60,7 @@ t_rota_info	rota_for_a_back(t_data *data)
 		}
 		i++;
 	}
-	D(rot.rotations);
-	if (is_max_or_min_back(data) == 2)
-		rot.rotations = index_min_a(data);
-	if (rot.rotations > midpoint)
-	{
-		rot.rotations = data->y_a - rot.rotations;
-		rot.direction = 'r';
-	}
-	D(rot.rotations);
+	rota_for_a_helper(data, &rot);
 	return (rot);
 }
 
@@ -70,7 +73,7 @@ t_rota_info	rota_for_a_back(t_data *data)
 void	move_back_a(t_data *data)
 {
 	const t_rota_info	info = rota_for_a_back(data);
-	int	i;
+	int					i;
 
 	i = 0;
 	while (i < info.rotations && info.direction == 'n')
@@ -121,7 +124,8 @@ t_rota_info	rota_for_a(t_data *data, int index)
  * @param index
  * @param midpoint
  */
-t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint)
+t_rota_info	rota_for_b_helper(t_data *data,
+	t_rota_info info, const int midpoint)
 {
 	if (if_big_b_top(data) == 1)
 	{
@@ -144,6 +148,17 @@ t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint
 	return (info);
 }
 
+void	b_helper(t_data *data, t_rota_info *info)
+{
+	const int	midpoint = data->y_b / 2;
+
+	if (info->rotations > midpoint)
+	{
+		info->rotations = data->y_b - info->rotations;
+		info->direction = 'r';
+	}
+}
+
 /**
  * @brief calculates number of rotations in stack b to account
  * for int index at the top of stack a.
@@ -153,7 +168,7 @@ t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint
  */
 t_rota_info	rota_for_b(t_data *data, int index)
 {
-	const int	midpoint = data->y_b / 2 + 1;
+	const int	midpoint = data->y_b / 2;
 	int			i;
 	long int	temp;
 	t_rota_info	info;
@@ -176,11 +191,7 @@ t_rota_info	rota_for_b(t_data *data, int index)
 		}
 		i++;
 	}
-	if (info.rotations > midpoint)
-	{
-		info.rotations = data->y_b - info.rotations;
-		info.direction = 'r';
-	}
+	b_helper(data, &info);
 	return (info);
 }
 
@@ -304,7 +315,7 @@ int	index_to_move(t_data *data)
 	index = 0;
 	while (i < data->y_a)
 	{
-		if(data->cal[i] < temp)
+		if (data->cal[i] < temp)
 		{
 			temp = data->cal[i];
 			index = i;
@@ -343,7 +354,7 @@ void	same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b)
  */
 void	index_ope(t_data *data)
 {
-	int					index = index_to_move(data);
+	const int			index = index_to_move(data);
 	const t_rota_info	rota_info_a = rota_for_a(data, index);
 	const t_rota_info	rota_info_b = rota_for_b(data, index);
 
@@ -352,13 +363,15 @@ void	index_ope(t_data *data)
 	else if (data->y_a == 3)
 	{
 		three_left(data);
-			return ;
+		return ;
 	}
-	else if (rota_for_a(data, index).direction == rota_for_b(data, index).direction)
+	else if (rota_for_a(data, index).direction
+		== rota_for_b(data, index).direction)
 	{
 		same_dir(data, rota_info_a, rota_info_b);
 	}
-	else if (rota_for_a(data, index).direction != rota_for_b(data, index).direction)
+	else if (rota_for_a(data, index).direction
+		!= rota_for_b(data, index).direction)
 	{
 		diff_dir_a(data, rota_info_a);
 		diff_dir_b(data, rota_info_b);
@@ -373,15 +386,6 @@ void	index_ope(t_data *data)
  */
 void	master(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	calculus_array(data);
-	while (i < data->y_a)
-	{
-		printf("%d,", data->cal[i]);
-		i++;
-	}
-	D(index_to_move(data));
 	index_ope(data);
 }

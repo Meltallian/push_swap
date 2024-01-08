@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/05 17:21:23 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:02:04 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ int	init(t_data *data, int ac, char **av)
 	data->cal = malloc(data->y_a * sizeof(int));
 	if (data->cal == NULL)
 		return (0);
-	pb(data);
-	pb(data);
+	if (is_stack_a_sorted(data) == 1)
+		soft_kill(data);
+	if (data->y_a > 3)
+	{
+		pb(data);
+		pb(data);
+	}
 	return (0);
 }
 
@@ -55,28 +60,28 @@ int main(int ac, char **av) {
 
     init(&data, ac, av); // Initialize the data structure
 
-    printf("Before command:\n");
-    print_stacks_side_by_side(&data);
+    // printf("Before command:\n");
+    // print_stacks_side_by_side(&data);
 	while (data.y_a >= 4)
 	{
 	master(&data);
-    printf("\nAfter master command:\n");
-    print_stacks_side_by_side(&data);
+    // printf("\nAfter master command:\n");
+    // print_stacks_side_by_side(&data);
 	}
 	master(&data);
-    printf("\nAfter master command:\n");
-    print_stacks_side_by_side(&data);
+    // printf("\nAfter master command:\n");
+    // print_stacks_side_by_side(&data);
 	while (data.y_b > 0)
 	{
 		move_back_a(&data);
-    	printf("\nAfter master command:\n");
-    	print_stacks_side_by_side(&data);
+    	// printf("\nAfter master command:\n");
+    	// print_stacks_side_by_side(&data);
 	}
 	rota_a_final(&data);
-    printf("\nAfter master command:\n");
-    print_stacks_side_by_side(&data);
-	if (is_stack_a_sorted(&data) == 1)
-		ft_printf("Shit is sorted.");
+    // printf("\nAfter master command:\n");
+    // print_stacks_side_by_side(&data);
+	// if (is_stack_a_sorted(&data) == 1)
+	// 	ft_printf("Shit is sorted.");
     clean(&data); // Clean up resources
     return 0;
 }

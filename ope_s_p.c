@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:09:53 by jbidaux           #+#    #+#             */
-/*   Updated: 2023/12/19 11:54:12 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:51:23 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	pa(t_data *data)
 	data->stacks[B][i].value = 0;
 	data->y_a++;
 	data->y_b--;
-ft_printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	pb(t_data *data)

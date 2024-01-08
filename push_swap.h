@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/05 17:20:16 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:51:08 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 
 # define V_MOD 1
 
-# define D(xxx) printf("%d", xxx)
+//# define D(xxx) printf("%d", xxx)
 
-# define S(xxx) printf("%c", xxx)
+//# define S(xxx) printf("%c", xxx)
 
-# define P printf("prout")
+//# define P printf("prout")
 
 typedef struct s_rota_info {
 	int		rotations;
@@ -75,6 +75,7 @@ void		check_int_dup(t_data *data);
 long int	ft_atoi_evil(const char *str, t_data *data);
 size_t		ft_strcspn(const char *s1, const char *s2);
 void		kill_tab_atoi(t_data *data);
+int			soft_kill(t_data *data);
 int			init(t_data *data, int ac, char **av);
 void		mode_allow(t_data *data);
 void		sa(t_data *data);
@@ -95,7 +96,8 @@ int			is_stack_a_sorted(t_data *data);
 int			index_max_b(t_data *data);
 void		diff_dir_a(t_data *data, t_rota_info rota_info_a);
 void		diff_dir_b(t_data *data, t_rota_info rota_info_b);
-void		same_dir_combined_utils(t_data *data, t_rota_info info, int combined);
+void		same_dir_combined_utils(t_data *data,
+				t_rota_info info, int combined);
 void		same_dir_rota_a_helper(t_data *data, t_rota_info info_a, int rot_a);
 void		same_dir_rota_b_helper(t_data *data, t_rota_info info_b, int rot_b);
 void		two_left(t_data *data);
@@ -104,7 +106,8 @@ void		three_left(t_data *data);
 int			index_max_b(t_data *data);
 int			if_big_b_top(t_data *data);
 int			is_max_or_min(t_data *data, int index);
-t_rota_info	rota_for_b_helper(t_data *data, t_rota_info info, const int midpoint);
+t_rota_info	rota_for_b_helper(t_data *data,
+				t_rota_info info, const int midpoint);
 t_rota_info	rota_for_a_back(t_data *data);
 void		move_back_a(t_data *data);
 int			index_min_a(t_data *data);
