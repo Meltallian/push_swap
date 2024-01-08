@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 14:35:45 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 15:30:06 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ size_t		ft_strcspn(const char *s1, const char *s2);
 void		kill_tab_atoi(t_data *data);
 int			soft_kill(t_data *data);
 int			init(t_data *data, int ac, char **av);
-void		mode_allow(t_data *data);
 void		sa(t_data *data);
 void		sb(t_data *data);
 void		ss(t_data *data);

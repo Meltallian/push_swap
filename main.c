@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 14:11:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 15:30:15 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	init(t_data *data, int ac, char **av)
 		conver_string(data, av);
 	if (ac > 2)
 		conver_param(data, ac - 1, &av[1]);
-	mode_allow(data);
 	data->kill.stack = 0;
 	data->kill.tab = 0;
 	data->cal = malloc(data->y_a * sizeof(int));

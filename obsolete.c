@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:48:27 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 11:51:43 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 15:29:59 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@
 		info.direction = 'r';
 	}
 	return (info);
+} */
+
+/* void	mode_allow(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->y_a)
+	{
+		data->stacks[A][i].mod = V_MOD;
+		data->stacks[B][i].mod = E_MOD;
+		i++;
+	}
 } */
