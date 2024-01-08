@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 11:51:08 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 14:35:45 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 
 # define V_MOD 1
 
-//# define D(xxx) printf("%d", xxx)
+//# define D(xxx) ft_printf("%d", xxx)
 
-//# define S(xxx) printf("%c", xxx)
+//# define S(xxx) ft_printf("%c", xxx)
 
-//# define P printf("prout")
+//# define P ft_printf("prout")
 
 typedef struct s_rota_info {
 	int		rotations;
@@ -91,9 +91,12 @@ void		rrb(t_data *data);
 void		rrr(t_data *data);
 int			min(int a, int b);
 int			max(int a, int b);
+void		index_ope(t_data *data);
 void		master(t_data *data);
 int			is_stack_a_sorted(t_data *data);
 int			index_max_b(t_data *data);
+int			index_to_move(t_data *data);
+void		same_dir(t_data *data, t_rota_info info_a, t_rota_info info_b);
 void		diff_dir_a(t_data *data, t_rota_info rota_info_a);
 void		diff_dir_b(t_data *data, t_rota_info rota_info_b);
 void		same_dir_combined_utils(t_data *data,
@@ -113,5 +116,19 @@ void		move_back_a(t_data *data);
 int			index_min_a(t_data *data);
 int			is_max_or_min_back(t_data *data);
 void		rota_a_final(t_data *data);
+void		rota_for_a_helper(t_data *data, t_rota_info *rot);
+void		rota_for_a_helperr(t_data *data,
+				t_rota_info *rot, long int temp, int i);
+t_rota_info	rota_for_a_back(t_data *data);
+void		move_back_a(t_data *data);
+t_rota_info	rota_for_a(t_data *data, int index);
+t_rota_info	rota_for_b_helper(t_data *data,
+				t_rota_info info, const int midpoint);
+void		b_helper(t_data *data, t_rota_info *info);
+t_rota_info	rota_for_b(t_data *data, int index);
+int			calcul_max_min_special(t_data *data, int index);
+int			calcul_utils(t_data *data, int index);
+int			calcul(t_data *data, int index);
+void		calculus_array(t_data *data);
 
 #endif // PUSH_SWAP_H
