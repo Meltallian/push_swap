@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:19:58 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 12:22:55 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/08 13:58:33 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	rota_for_a_helper(t_data *data, t_rota_info *rot)
 	{
 		rot->rotations = data->y_a - rot->rotations;
 		rot->direction = 'r';
+	}
+}
+
+void	rota_for_a_helperr(t_data *data, t_rota_info *rot, long int temp, int i)
+{
+	if (data->stacks[A][i].value > temp)
+	{
+		temp = data->stacks[A][i].value;
+		rot->rotations = i + 1;
 	}
 }
 
@@ -46,13 +55,9 @@ t_rota_info	rota_for_a_back(t_data *data)
 	{
 		if (data->stacks[A][i].value < data->stacks[B][0].value)
 		{
-			if (data->stacks[A][i].value > temp)
-			{
-				temp = data->stacks[A][i].value;
-				rot.rotations = i + 1;
-			}
-			if (temp < data->stacks[B][0].value &&
-				temp == data->stacks[A][data->y_a - 1].value)
+			rota_for_a_helperr(data, &rot, temp, i);
+			if (temp < data->stacks[B][0].value && temp ==
+				data->stacks[A][data->y_a - 1].value)
 			{
 				rot.rotations = 0;
 				return (rot);
