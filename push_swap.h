@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 15:30:06 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 10:57:29 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 
 # define V_MOD 1
 
-//# define D(xxx) ft_printf("%d", xxx)
+# define D(xxx) ft_printf("%d", xxx)
 
-//# define S(xxx) ft_printf("%c", xxx)
+# define S(xxx) ft_printf("%c", xxx)
 
-//# define P ft_printf("prout")
+# define P ft_printf("prout")
 
 typedef struct s_rota_info {
 	int		rotations;

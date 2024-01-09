@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 15:30:15 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 11:34:51 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,56 @@ int	init(t_data *data, int ac, char **av)
 	return (0);
 }
 
-/* void	print_stacks_side_by_side(t_data *data)
+void	print_stacks_side_by_side(t_data *data)
 {
 	int max_len = (data->y_a > data->y_b) ? data->y_a : data->y_b;
 
-	ft_printf("%-20s%-20s\n", "stack_a", "stack_b");
+	printf("%-20s%-20s\n", "stack_a", "stack_b");
 	for (int i = 0; i < max_len; i++) {
 		if (i < data->y_a)
-			ft_printf("%-20ld", data->stacks[A][i].value);
+			printf("%-20ld", data->stacks[A][i].value);
 		else
-			ft_printf("%-20s", "");
+			printf("%-20s", "");
 
 		if (i < data->y_b)
-			ft_printf("%-20ld", data->stacks[B][i].value);
+			printf("%-20ld", data->stacks[B][i].value);
 		else
-			ft_printf("%-20s", "");
+			printf("%-20s", "");
 
-		ft_printf("\n");
+		printf("\n");
 	}
-} */
+}
 
 int	main(int ac, char **av)
+{
+	t_data	data;
+
+	init(&data, ac, av);
+	ft_printf("\nBefore master command:\n");
+	print_stacks_side_by_side(&data);
+	while (data.y_a >= 4)
+	{
+		master(&data);
+		ft_printf("\nAfter master command:\n");
+		print_stacks_side_by_side(&data);
+	}
+	master(&data);
+	while (data.y_b > 0)
+	{
+		move_back_a(&data);
+		ft_printf("\nAfter master command:\n");
+		print_stacks_side_by_side(&data);
+	}
+	rota_a_final(&data);
+	ft_printf("\nAfter master command:\n");
+	print_stacks_side_by_side(&data);
+	if (is_stack_a_sorted(&data) == 1)
+		ft_printf("Shit is sorted.");
+	clean(&data);
+	return (0);
+}
+
+/* int	main(int ac, char **av)
 {
 	t_data	data;
 
@@ -68,9 +97,4 @@ int	main(int ac, char **av)
 	rota_a_final(&data);
 	clean(&data);
 	return (0);
-}
-
-// ft_printf("\nAfter master command:\n");
-// print_stacks_side_by_side(&data);
-// if (is_stack_a_sorted(&data) == 1)
-// 	ft_printf("Shit is sorted.");
+} */

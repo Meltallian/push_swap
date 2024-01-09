@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:19:20 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:59 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 10:33:13 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,32 @@ int	init(t_data *data, int ac, char **av)
 	return (0);
 }
 
-void	checker(t_data *data)
+void	error_line_bonus(char *line)
 {
-	int		bytes;
-	char	buffer[5];
+	free(line);
+	ft_printf("Error");
+	exit (0);
+}
 
-	bytes = 0;
-	while (1)
-	{
-		bytes = read(STDIN_FILENO, buffer, 5);
-		if (bytes > 0)
+void	line_check(char *line)
+{
+	if (!(line == "sa" || line == "sb" || line == "ss" || line == "pa" ||
+		line == "pb" || line == "ra" || line == "rb" || line == "rr" ||
+		line == "rra" || line == "rrb" || line == "rrr"))
 		{
-
+			free(line);
+			ft_printf("Error");
+			exit (0);
 		}
-		else if (bytes == 0)
-			break ;
-	}
+}
+
+int	checker(t_data *data, int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	line_check(line);
+
 }
 
 int	main(int ac, char **av)

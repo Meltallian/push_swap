@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:48:38 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/05 16:55:55 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 11:03:29 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ int	index_max_b(t_data *data)
 	return (index);
 }
 
+/**
+ * @brief returns index of the min integer of stack a;
+ *
+ * @param data
+ * @return int
+ */
 int	index_min_a(t_data *data)
 {
 	int	i;

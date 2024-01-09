@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:16:08 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 14:16:22 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 10:50:48 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_rota_info	rota_for_b_helper(t_data *data,
 	if (if_big_b_top(data) == 1)
 	{
 		info.rotations = 0;
-		info.direction = 'r';
+		info.direction = 'n';
 		return (info);
 	}
 	if (index_max_b(data) <= midpoint)
