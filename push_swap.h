@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/09 10:57:29 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 13:39:32 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define V_MOD 1
 
 # define D(xxx) ft_printf("%d", xxx)
+
+# define L(xxx) printf("%ld", xxx)
 
 # define S(xxx) ft_printf("%c", xxx)
 
@@ -116,7 +118,7 @@ int			index_min_a(t_data *data);
 int			is_max_or_min_back(t_data *data);
 void		rota_a_final(t_data *data);
 void		rota_for_a_helper(t_data *data, t_rota_info *rot);
-void		rota_for_a_helperr(t_data *data,
+long int	rota_for_a_helperr(t_data *data,
 				t_rota_info *rot, long int temp, int i);
 t_rota_info	rota_for_a_back(t_data *data);
 void		move_back_a(t_data *data);

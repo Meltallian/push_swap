@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:47:35 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/09 11:34:51 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 13:40:20 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	init(t_data *data, int ac, char **av)
 	return (0);
 }
 
-void	print_stacks_side_by_side(t_data *data)
+/* void	print_stacks_side_by_side(t_data *data)
 {
 	int max_len = (data->y_a > data->y_b) ? data->y_a : data->y_b;
 
@@ -82,9 +82,9 @@ int	main(int ac, char **av)
 		ft_printf("Shit is sorted.");
 	clean(&data);
 	return (0);
-}
+} */
 
-/* int	main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_data	data;
 
@@ -97,4 +97,4 @@ int	main(int ac, char **av)
 	rota_a_final(&data);
 	clean(&data);
 	return (0);
-} */
+}

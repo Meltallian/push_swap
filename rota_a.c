@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:13:19 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/09 12:07:15 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 13:40:02 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,24 @@ void	rota_for_a_helper(t_data *data, t_rota_info *rot)
 		rot->rotations = data->y_a - rot->rotations;
 		rot->direction = 'r';
 	}
-	D(rot->rotations);
 }
 
-void	rota_for_a_helperr(t_data *data, t_rota_info *rot, long int temp, int i)
+long int	rota_for_a_helperr(t_data *data, t_rota_info *rot, long int temp, int i)
 {
+	// printf("\nLook at this \n");
+	// D(i);
+	// printf(" ,");
+	// L(data->stacks[A][i].value);
+	// printf(" ,");
+	// L(temp);
+	// printf(" ,");
+	// printf("\nend of check");
 	if (data->stacks[A][i].value > temp)
 	{
-		D(i);
-		D(data->stacks[A][i].value);
-		D(temp);
 		temp = data->stacks[A][i].value;
 		rot->rotations = i + 1;
 	}
+	return (temp);
 }
 
 /**
@@ -61,7 +66,7 @@ t_rota_info	rota_for_a_back(t_data *data)
 	{
 		if (data->stacks[A][i].value < data->stacks[B][0].value)
 		{
-			rota_for_a_helperr(data, &rot, temp, i);
+			temp = rota_for_a_helperr(data, &rot, temp, i);
 			if (temp < data->stacks[B][0].value && temp ==
 				data->stacks[A][data->y_a - 1].value)
 			{
@@ -71,8 +76,9 @@ t_rota_info	rota_for_a_back(t_data *data)
 		}
 		i++;
 	}
-	D(rot.rotations);
+	// D(rot.rotations);
 	rota_for_a_helper(data, &rot);
+	// D(rot.rotations);
 	return (rot);
 }
 
