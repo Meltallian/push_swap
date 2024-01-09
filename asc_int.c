@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:51:41 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/08 15:29:34 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:50:28 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,3 @@ void	conver_param(t_data *data, int ac, char **av)
 	check_int_dup(data);
 	kill_tab_atoi(data);
 }
-

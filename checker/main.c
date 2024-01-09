@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:19:20 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/09 15:39:46 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:46:22 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,21 @@ int	init(t_data *data, int ac, char **av)
 	return (0);
 }
 
-void	error_line_bonus(char *line)
-{
-	free(line);
-	ft_printf("Error");
-	exit (0);
-}
-
 void	line_check(char *line)
 {
-	if (!(strcmp(line, "sa\n") == 0 || strcmp(line, "sb\n") == 0 || strcmp(line, "ss\n") == 0 ||
-		strcmp(line, "pa\n") == 0 || strcmp(line, "pb\n") == 0 || strcmp(line, "ra\n") == 0 ||
-		strcmp(line, "rb\n") == 0 || strcmp(line, "rr\n") == 0 || strcmp(line, "rra\n") == 0 ||
-		strcmp(line, "rrb\n") == 0 || strcmp(line, "rrr\n") == 0 || strcmp(line, "\n") == 0))
-		{
-			free(line);
-			ft_printf("Error");
-			exit (0);
-		}
+	if (!(strcmp(line, "sa\n") == 0 || strcmp(line, "sb\n") == 0
+			|| strcmp(line, "ss\n") == 0 || strcmp(line, "pa\n") == 0
+			|| strcmp(line, "pb\n") == 0 || strcmp(line, "ra\n") == 0
+			|| strcmp(line, "rb\n") == 0 || strcmp(line, "rr\n") == 0
+			|| strcmp(line, "rra\n") == 0 || strcmp(line, "rrb\n") == 0
+			|| strcmp(line, "rrr\n") == 0 || strcmp(line, "\n") == 0))
+	{
+		free(line);
+		ft_printf("Error");
+		exit (0);
+	}
 }
+
 void	move(t_data *data, char *line)
 {
 	if (strcmp(line, "sa\n") == 0)
